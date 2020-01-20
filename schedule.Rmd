@@ -1,0 +1,326 @@
+---
+  title: "Schedule"
+---
+  
+  **Click on the text like "Week 1: Jan 20 -- 24" to expand or collapse the items we covered in that week.**
+  
+  I will fill in more detail and provide links to lecture notes and labs as we go along.  Items for future dates are tentative and subject to change.
+
+```{r, echo = FALSE}
+make_week_box <- function(id, open, title, contents) {
+  cat('
+<div class="panel panel-default">
+<div class="panel-heading" role="tab" id="headingOne">
+<h5 class="mb-0">
+<a data-toggle="collapse" href="#',
+id,
+'" aria-expanded="true" aria-controls="collapseOne">
+',
+title,
+'</a>
+</h5>
+</div>
+
+<div id="',
+id,
+'" class="collapse',
+ifelse(open, " in", ""),
+'">
+<div class="panel-body">
+',
+contents,
+'
+</div>
+</div>
+</div>',
+      sep = "")
+}
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
+
+#### Wed, Jan 22
+ * **In class**, we will work on:
+    * Discuss [syllabus](syllabus/syllabus_stat_343.pdf), overview of course
+    * Review of prerequisites
+        * Topics from probability: [pdf](resources/probability/probability.pdf) (also posted on resources page)
+        * Practice examples for probability: [pdf](materials/20200122_probability/probability_practice.pdf)
+        * Common probability distributions: [pdf](resources/probability/probability_distributions.pdf) (also posted on resources page; you don't need to memorize this material)
+        * Topics from calculus (not discussed today, please review after class): [pdf](resources/calculus/calculus.pdf) (also posted on resources page)
+ * **After class**, please do the following:
+    * **Register for GitHub** [here](https://github.com) if you haven't already; I will ask you to provide your GitHub user name in the questionairre below.
+    * **Fill out** a brief [questionnairre](https://goo.gl/forms/qFlzOcikqxAkDrJE2)
+    * **Fill out** this brief [poll about when my office hours should be held](http://whenisgood.net/n4ahdz3)
+    * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2020/stat343](https://piazza.com/mtholyoke/spring2020/stat343)
+    * **Reading**
+        * Review the prerequisite material from probability and calculus.  If there are any topics from probability or calculus that you don't have memorized, please start memorizing them.  This will make the rest of this class go much more smoothly for you.  If you have any questions on this material, please don't hesitate to ask me in office hours or on Piazza.  I am happy to help with this material.
+        * Over the next 1 or 2 classes we will cover material from Chapter 6 of the text.  Give those sections in the book a brief skim.
+    * **Homework 0** due 5 pm Mon, Jan 27
+
+
+#### Fri, Jan 24
+ * **In class**, we will work on:
+    * Wrap up any remaining probability examples from last class
+    * Define the $t$, $F$, and $\\chi^2$ distributions
+ * **After class**, please:
+    * **Reading:** Over the next few classes we will cover material from Sections 8.1, 8.2, 8.3, and 8.5 of the text.  Give those sections in the book a brief skim.
+    * **Homework 0** due 5 pm Mon, Jan 27
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
+#### Mon, Jan 27
+ * **In class**, we will work on:
+    * If necessary, finish defining the $t$, $F$, and $\\chi^2$ distributions
+    * Start on maximum likelihood estimation
+ * **After class**, please:
+    * **Reading:** Over the next few classes we will cover material from Sections 8.1, 8.2, 8.3, and 8.5 of the text.  Give those sections in the book a brief skim.
+    * **Homework 0** due 5 pm **today**, Mon, Jan 27
+
+#### Wed, Jan 29
+ * **In class**, we will work on:
+    * **Quiz** on probability background.  This will be very similar to HW 0.  Please memorize everything on the \"Topics from probability\" document linked on the Resources page, and know how to use it.  You only need to know the informal statement of the Central Limit Theorem.
+    * More on maximum likelihood estimation
+ * **After class**, please:
+    * **Reading:** Continue working through Section 8.5.  Also give Section 8.4 a brief skim.
+    * **Homework 1** due 5 pm Wed, Feb 5
+
+
+#### Fri, Jan 31
+ * **In class**, we will work on:
+    * Either more on maximum likelihood estimation, or method of moments.
+ * **After class**, please:
+    * **Homework 1** due 5 pm Wed, Feb 5
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
+#### Mon, Feb 03
+ * **In class**, we will work on:
+ * **After class**, please:
+    * **Homework 1** due 5 pm Wed, Feb 5
+
+
+#### Wed, Feb 05
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Feb 07
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
+#### Mon, Feb 10
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Feb 12
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Feb 14
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
+#### Mon, Feb 17
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Feb 19
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Feb 21
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
+#### Mon, Feb 24
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Feb 26
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Feb 28
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
+#### Mon, Mar 02
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Mar 04
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Mar 06
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
+#### Mon, Mar 09
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Mar 11
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Mar 13
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week9", TRUE, "Week 9: Mar 16 -- Mar 20", "
+#### Mon, Mar 16
+ * **No Class**: Midsemester Break.  Safe travels!
+
+
+#### Wed, Mar 18
+ * **No Class**: Midsemester Break.  Safe travels!
+
+
+#### Fri, Mar 20
+ * **No Class**: Midsemester Break.  Safe travels!
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week10", TRUE, "Week 10: Mar 23 -- Mar 27", "
+#### Mon, Mar 23
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Mar 25
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Mar 27
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", "
+#### Mon, Mar 30
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Apr 01
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Apr 03
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", "
+#### Mon, Apr 06
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Apr 08
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Apr 10
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week13", TRUE, "Week 13: Apr 13 -- Apr 17", "
+#### Mon, Apr 13
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Apr 15
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Apr 17
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week14", TRUE, "Week 14: Apr 20 -- Apr 24", "
+#### Mon, Apr 20
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Wed, Apr 22
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+#### Fri, Apr 24
+ * **In class**, we will work on:
+ * **After class**, please:
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("week15", TRUE, "Week 15: Apr 27 -- May 01", "
+#### Mon, Apr 27
+ * **In class**, we will work on:
+ * **After class**, please:
+
+
+")
+```
+
+```{r, echo = FALSE, results='asis'}
+make_week_box("finals", TRUE, "Final Exams: May 04 -- May 08", "We will not have a final exam in this class.")
+```
+

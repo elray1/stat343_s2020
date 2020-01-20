@@ -1,0 +1,167 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage{url}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{color,soul}
+\usepackage{booktabs}
+
+\pagestyle{fancy}
+
+\lhead{\textsc{Evan L. Ray}}
+\chead{\textsc{Stat 343: Syllabus}}
+\rhead{\textsc{Spring 2020}}
+\lfoot{}
+\cfoot{}
+%\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.0pt}
+
+\title{Stat 343:\\Mathematical Statistics}
+\author{Evan L. Ray}
+\date{Spring 2020}
+
+\begin{document}
+%\maketitle
+	%\Large 
+
+\ \\
+\vspace{.01in}
+\begin{center}
+{\large Stat 343: Mathematical Statistics}
+\end{center}
+\subsection*{About the Course}
+
+\paragraph{Basic Information}  
+
+\begin{itemize}
+ \item Meeting Time and Location: Mon, Wed, and Fri 9:30AM - 10:45AM in Clapp 420.
+ \item Course Website: \url{http://www.evanlray.com/stat343_s2020/}
+ \item Email: \texttt{eray@mtholyoke.edu}
+ \item Office: Clapp 404C
+ \item Office Hours: I will hold regularly scheduled office hours each week at times to be selected by you.  These times will be posted on the course web site.  Please do not hesitate to contact me to set up appointments for additional office hours too.
+\end{itemize}
+
+\paragraph{Textbook}
+
+We will be using ``Mathematical Statistics and Data Analysis" (3rd edition, ISBN 978-8131519547) by Rice as the primary text for this class.  A copy will be on reserve, and the department has a copy you can borrow for short times.  I will assume that you are familiar with most of the material in the first 5 chapters of this text, but we will review some essential topics in the first few days.  We will primarily focus on material from Chapters 6, 8, and 9 of the text book.  This is a good book, but it doesn't cover all the material I would like to.  In order to fill in the gaps in Rice, I will also be drawing on material from other sources.  You don't need to purchase these other texts, but in case you are curious -- additional topics and ideas will likely come from the following texts, among others:
+\begin{itemize}
+\item Introduction to Statistical Thought by Lavine
+\item Mathematical Statistics with Resampling and R by Chihara and Hesterberg
+\end{itemize}
+
+\paragraph{Piazza}
+
+We have a Piazza page for this course at \url{https://piazza.com/mtholyoke/spring2020/stat343}.  I ask that you \textbf{please submit all questions about course content as questions on the Q{\&}A forum at Piazza}.  This will allow other students to answer your questions if they see them before me, and will allow other students to benefit from the answers to your questions.  Additionally, \textbf{you can post questions and answers to Piazza anonymously}.
+
+\paragraph{Description}
+
+The purpose of this class is to provide you with the theoretical understanding and computational skills necessary to select and implement appropriate methods for statistical inference in new settings.
+
+We will examine the theory behind statistical inference procedures including point and interval estimation and hypothesis testing, as well as the computational methods needed to implement these inference procedures.  In terms of theory, our goals are to understand common methods for deriving inference procedures for statistical model parameters, how and why these methods work, and how we can evaluate the relative performance of different inference procedures.  We will focus primarily on inference for parametric models, but will also discuss inferential techniques that can be used when parametric assumptions are suspect.  Computational tasks will include implementation of estimation procedures such as Newton's method for maximum likelihood, MCMC methods for Bayesian inference, and the non-parametric bootstrap.  We will use simulation studies extensively to compare the performance of different approaches to inference.
+
+A tentative schedule and topic list is below.  An up-to-date list of topics covered so far and a time line for upcoming classes will be kept on the course website.
+
+\begin{table}[!h]
+\begin{tabular}{r p{11cm} l}
+\toprule
+Unit & Topic & Weeks \\
+\midrule
+Probability & \textbf{Probability}: Review topics from probability and related functions in R; definition of t, F, and $\chi^2$ distributions & 1, 2 \\
+\midrule
+Parameter Estimation & \textbf{Frequentist Methods}: Method of moments; maximum likelihood via analytic maximization; maximum likelihood via numeric optimization; sampling distributions; bias, variance, mean squared error & 2, 3, 4 \\
+\cmidrule(r){2-3}
+ & \textbf{Bayesian Methods}: Prior and posterior distributions; conjugacy; MCMC & 4, 5, 6 \\
+\midrule
+Large-sample Results & \textbf{Frequentist Results}: The asymptotic distribution of the MLE; Fisher information; Efficiency; the Cram\'{e}r-Rao lower bound & 6, 7 \\
+\cmidrule(r){2-3}
+ & \textbf{Bayesian Results}: Laplace approximation to the posterior distribution; large-sample convergence & 7, 8 \\
+\midrule
+Interval Estimation & \textbf{Bayesian credible intervals}: Posterior percentiles; highest posterior density & 8 \\
+\cmidrule(r){2-3}
+ & \textbf{Frequentist confidence intervals}: Exact; from large-sample approximation & 10 \\
+\cmidrule(r){2-3}
+ & \textbf{Bootstrap confidence intervals}: Non-parametric bootstrap confidence intervals; bootstrap t confidence intervals & 11 \\
+\midrule
+Hypothesis Testing & \textbf{Frequentist Tests}: The frequentist set-up; p-values, errors, power, and power functions; likelihood ratio tests; $t$ and $F$ tests; correspondence between tests and confidence intervals & 12, 13 \\
+\cmidrule(r){2-3}
+ & \textbf{Bayesian ideas}: Posterior probability of parameter sets & 13 \\
+\midrule
+Extra Week & If time, we will discuss special topics to be selected from mixture models, kernel density estimation, and shrinkage estimators & 14, 15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\subsection*{Policies}
+
+\paragraph{Attendance}
+
+Your attendance in class is crucial, unless you are sick.  If you are sick, please let me know and stay home and rest; I hope you feel better!
+
+\paragraph{Collaboration}
+
+Much of this course will operate on a collaborative basis, and you are expected and encouraged to work together with a partner or in small groups to study, complete homework assignments, and prepare for exams. However, every word that you write must be your own.  Copying and pasting sentences, paragraphs, or large blocks of R code from another student is not acceptable and will receive no credit or a penalty.  No interaction with anyone but the instructor is allowed on any exams or quizzes.  All students, staff and faculty are bound by the Mount Holyoke College Honor Code.
+
+To sum up: \textbf{I want you to work together} on homeworks and labs.  \emph{But,} \textbf{you must write up your answers yourself.}
+
+Cases of dishonesty, plagiarism, etc., will be reported.
+
+\subsection*{Technology}
+
+\paragraph{Computing with R}
+
+In each unit of this class, we will study three possible approaches to a problem: (1) exact analytic solutions, which are often only feasible with the simplest of models; (2) methods based on approximations that are only reasonable when the sample size is large; and (3) computational approaches based on numerical optimization or sampling.  In modern statistics, these computational approaches are employed at least as often as the more mathematical methods.  Therefore, computational fluency is required in addition to mathematical fluency.
+
+We will use the R statistical programming language in this course.  R is one of the most commonly used programming languages in academic statistics; it's also very commonly used in statistics and data science positions in industry.  In this class, you will use R most days, and for many homework problems.  I expect that you are familiar with R from previous classes, but I do not expect that you are an expert at R yet.  That said, it is imperative that you let me know if you have questions about anything we are doing in R as soon as possible.
+
+We will use R via RStudio; Mount Holyoke's version of RStudio Server can be accessed at \url{https://rstudio.mtholyoke.edu/}.  You are also welcome to work locally on your own computer if you have RStudio set up; however, please make sure you have installed at least version 3.6.1 of R and the latest versions of any R packages we use.
+
+It will be important to \textbf{bring your laptop to class}; we will be using R most days.  Please let me know if this presents any issues, as there are laptops available for you to borrow.
+
+\paragraph{Version Control with Git and GitHub}
+
+Git is a version control system that facilitates working on coding and writing projects collaboratively, and allows you to revert your code to a previous version if you realize that you made a mistake.  Version control systems such as git are used in most modern data science and statistics positions in industry.  Part of my goal as an educator in the statistics program is to ensure that you are prepared to enter the work force, and for that reason the basic use of git is a learning objective for this course.  This means that all labs and the computational portion of homework assignments will be distributed to you in git repositories and submitted by committing and pushing the completed assignment to GitHub.  I will provide further details and walk through this process, as well as basic interaction with git, in class.  We will use the graphical interface to git that is built into RStudio rather than the command line interface to git.
+
+\subsection*{Assignments}
+
+\paragraph{Homework}
+Homework is the most effective way to reinforce concepts learned in class. There will be regular homework assignments. Homework assignments will generally include a computational component and a more theoretical component. I may accept a homework assignment within 24 hours of the due date for a 25\% penalty. If you turn in an assignment late, there's a decent chance that it won't be graded until the end of the semester. Extensions may be possible, but need to be requested well before the deadline.
+
+\paragraph{Exams}
+There will be two midterm exams (the first on the probability and parameter estimation units and the second on the large-sample results and interval estimation units) and occasional quizzes to be taken during class, as well as a cumulative final exam during the exam period.  I haven't decided yet whether the exams will be in class, take home, or a mixture of in class and take home.
+
+\paragraph{Writing}
+Your ability to communicate results, which may be technical in nature, to your audience, which is likely to be non-technical, is critical to your success as a data analyst. The assignments in this class will place an emphasis on the clarity of your writing.  That said, we are all constantly improving at writing.  Your classmates and I are here to help you improve as a writer.
+
+\paragraph{Grading}
+When grading your written work, I am looking for solutions that are technically correct and reasoning that is clearly explained.  \emph{Numerically correct answers, alone, are not sufficient} on homework, tests or quizzes.  Neatness and organization are valued, with brief, clear answers that explain your thinking.  If I cannot read or follow your work, I cannot give you full credit for it.
+
+Your grade for this course will be a weighted average of the following components:
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{r c}
+\toprule
+Item & Weight \\
+\midrule
+Participation and Labs & 5\% \\
+\cmidrule(r){1-2}
+Homework & 15\% \\
+\cmidrule(r){1-2}
+Quizzes & 20\% \\
+\cmidrule(r){1-2}
+Midterm 1 & 20\% \\
+\cmidrule(r){1-2}
+Midterm 2 & 20\% \\
+\cmidrule(r){1-2}
+Final & 20\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

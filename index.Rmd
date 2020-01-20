@@ -1,0 +1,21 @@
+---
+title: "Applied Regression"
+---
+
+**Instructor:** Evan Ray
+
+**Email:** eray@mtholyoke.edu
+
+**Office:** Clapp 404C
+
+**Office Hours:** I have regularly scheduled office hours at times to be scheduled.  These are times I guarantee I will be in my office and available, but I am also available by appointment at other times; send an email to set up a time to meet.
+
+<!--**Evening Group Work**: We have scheduled rooms for evening group work, with TAs available to help with questions, on **days to be determined**.  These sessions will meet in **room to be determined**.-->
+
+**Text Book:** Our text book is "Mathematical Statistics and Data Analysis" (3rd edition) by John A. Rice.  A copy is on reserve at the library.
+
+**Piazza:** We are registered on Piazza at [https://piazza.com/mtholyoke/spring2020/stat343](https://piazza.com/mtholyoke/spring2020/stat343).  You can ask and answer questions there, anonymously if you want, and everyone in the class will be able to see and contribute to the answers.
+
+**Syllabus:** Will be posted later.
+
+Please use the navigation menu above to go to the schedule, homework assignments, and materials related to quizzes and exams.
