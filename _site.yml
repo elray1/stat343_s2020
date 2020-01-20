@@ -1,11 +1,11 @@
-name: "mhc-stat140-f2019-website"
+name: "mhc-stat343-s2020-website"
 output_dir: "."
 output:
   html_document:
     theme: paper
 navbar:
   type: default
-  title: "Stat 340"
+  title: "Stat 343"
   right:
     - text: "Schedule"
       href: schedule.html
