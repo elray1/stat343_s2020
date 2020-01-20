@@ -50,8 +50,8 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
         * Topics from calculus (not discussed today, please review after class): [pdf](resources/calculus/calculus.pdf) (also posted on resources page)
  * **After class**, please do the following:
     * **Register for GitHub** [here](https://github.com) if you haven't already; I will ask you to provide your GitHub user name in the questionairre below.
-    * **Fill out** a brief [questionnairre](https://goo.gl/forms/qFlzOcikqxAkDrJE2)
-    * **Fill out** this brief [poll about when my office hours should be held](http://whenisgood.net/n4ahdz3)
+    * **Fill out** a brief [questionnairre](https://docs.google.com/forms/d/e/1FAIpQLSfw9sGTYsHaA9D0NEuxLVVdD4QlQXDk59DFu0-E6KxLtnEhxw/viewform?usp=sf_link) (if you are taking two classes with me, you only need to fill out this questionairre once)
+    * **Fill out** this brief [poll about when my office hours should be held](https://zvite.co/i/JbeK8Cyi) (if you are taking two classes with me, you only need to fill out this poll once)
     * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2020/stat343](https://piazza.com/mtholyoke/spring2020/stat343)
     * **Reading**
         * Review the prerequisite material from probability and calculus.  If there are any topics from probability or calculus that you don't have memorized, please start memorizing them.  This will make the rest of this class go much more smoothly for you.  If you have any questions on this material, please don't hesitate to ask me in office hours or on Piazza.  I am happy to help with this material.
