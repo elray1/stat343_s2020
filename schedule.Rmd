@@ -62,7 +62,8 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
 #### Fri, Jan 24
  * **In class**, we will work on:
     * Wrap up any remaining probability examples from last class
-    * Define the $t$, $F$, and $\\chi^2$ distributions
+    * Define the $t$, $F$, and $\\chi^2$ distributions; this material is in Chapter 6 of Rice.  Lecture notes: [pdf](materials/20200124_chisq_t_F/lecture_notes.pdf) **Note that there is a minor error in the lecture notes that we did not make in class:** on page 5, the denominator should be the square root of a chi squared random variable divided by its degrees of freedom.  Basically, we need to take the square root of the square of the denominator to see that we have a t-distributed random variable.
+    * Lab 01.  See labs page for solutions.
  * **After class**, please:
     * **Reading:** Over the next few classes we will cover material from Sections 8.1, 8.2, 8.3, and 8.5 of the text.  Give those sections in the book a brief skim.
     * **Homework 0** due 5 pm Mon, Jan 27
@@ -73,7 +74,6 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
 make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 #### Mon, Jan 27
  * **In class**, we will work on:
-    * If necessary, finish defining the $t$, $F$, and $\\chi^2$ distributions
     * Start on maximum likelihood estimation
  * **After class**, please:
     * **Reading:** Over the next few classes we will cover material from Sections 8.1, 8.2, 8.3, and 8.5 of the text.  Give those sections in the book a brief skim.
@@ -81,7 +81,7 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 
 #### Wed, Jan 29
  * **In class**, we will work on:
-    * **Quiz** on probability background.  This will be very similar to HW 0.  Please memorize everything on the \"Topics from probability\" document linked on the Resources page, and know how to use it.  You only need to know the informal statement of the Central Limit Theorem.
+    * **Quiz** on probability background.  This will be very similar to the examples from Wednesday Jan 22 and HW 0.  Please memorize everything on the \"Topics from probability\" document linked on the Resources page, and know how to use it.  You only need to know the informal statement of the Central Limit Theorem.
     * More on maximum likelihood estimation
  * **After class**, please:
     * **Reading:** Continue working through Section 8.5.  Also give Section 8.4 a brief skim.
