@@ -45,7 +45,7 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
     * Discuss [syllabus](syllabus/syllabus_stat_343.pdf), overview of course
     * Review of prerequisites
         * Topics from probability: [pdf](resources/probability/probability.pdf) (also posted on resources page)
-        * Practice examples for probability: [pdf](materials/20200122_probability/probability_practice.pdf)
+        * Practice examples for probability: [pdf](materials/20200122_probability/probability_practice.pdf) Solutions: [pdf](materials/20200122_probability/probability_practice_sol.pdf)
         * Common probability distributions: [pdf](resources/probability/probability_distributions.pdf) (also posted on resources page; you don't need to memorize this material)
         * Topics from calculus (not discussed today, please review after class): [pdf](resources/calculus/calculus.pdf) (also posted on resources page)
  * **After class**, please do the following:
@@ -54,7 +54,7 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
     * **Fill out** this brief [poll about when my office hours should be held](https://zvite.co/i/JbeK8Cyi) (if you are taking two classes with me, you only need to fill out this poll once)
     * **Sign up** for our class at Piazza (anonymous question and answer forum): [https://piazza.com/mtholyoke/spring2020/stat343](https://piazza.com/mtholyoke/spring2020/stat343)
     * **Reading**
-        * Review the prerequisite material from probability and calculus.  If there are any topics from probability or calculus that you don't have memorized, please start memorizing them.  This will make the rest of this class go much more smoothly for you.  If you have any questions on this material, please don't hesitate to ask me in office hours or on Piazza.  I am happy to help with this material.
+        * Review the prerequisite material from probability and calculus.  If there are any topics from probability that you don't have memorized, please start memorizing them.  This will make the rest of this class go much more smoothly for you.  If you have any questions on this material, please don't hesitate to ask me in office hours or on Piazza.  I am happy to help with this material.
         * Over the next 1 or 2 classes we will cover material from Chapter 6 of the text.  Give those sections in the book a brief skim.
     * **Homework 0** due 5 pm Mon, Jan 27
 
