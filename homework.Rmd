@@ -5,12 +5,24 @@ title: "Homework"
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 | Assignment # | Description                                   | Due Date  | Value | Solutions                                          |
 +==============+===============================================+===========+=======+====================================================+
-|    0         | Review/Foundations.  Probability, a little    | 5 pm,     |  1    |                                                    |
-|              | calculus, and R.                              | 1/27/2019 |       |                                                    |
+|    0         | Review/Foundations.  Probability, a little    | 5 pm,     |  1    |  On GitHub                                         |
+|              | calculus, and R.                              | 1/27/2020 |       |                                                    |
 |              |                                               |           |       |                                                    |
 |              | Written part:                                 |           |       |                                                    |
 |              | [pdf](homework/ps0/ps0_written.pdf)           |           |       |                                                    |
 |              | [Rmd](homework/ps0/ps0_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part:                                       |           |       |                                                    |
+|              | Distributed via GitHub.                       |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+|    1         | $\chi^2$, $t$, and $F$ distributions.         | 5 pm,     |  1    |                                                    |
+|              | Maximum likelihood estimation.                | 2/5/2020  |       |                                                    |
+|              | Note: for this assignment, do the written     |           |       |                                                    |
+|              | part before the R part.                       |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps1/ps1_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps1/ps1_written.Rmd)           |           |       |                                                    |
 |              |                                               |           |       |                                                    |
 |              | R part:                                       |           |       |                                                    |
 |              | Distributed via GitHub.                       |           |       |                                                    |

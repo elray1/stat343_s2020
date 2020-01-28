@@ -38,7 +38,7 @@ contents,
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
+make_week_box("week1", FALSE, "Week 1: Jan 20 -- Jan 24", "
 
 #### Wed, Jan 22
  * **In class**, we will work on:
@@ -74,7 +74,11 @@ make_week_box("week1", TRUE, "Week 1: Jan 20 -- Jan 24", "
 make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 #### Mon, Jan 27
  * **In class**, we will work on:
-    * Start on maximum likelihood estimation
+    * Start on maximum likelihood estimation.
+        * Warm up example/worksheet: [pdf](materials/20200127_mle/20200127_mle_friend_or_foe.pdf)
+        * Plots to go with the example above: [pdf](materials/20200127_mle/20200127_mle_friend_or_foe_wrapup.pdf)
+        * Lecture notes for maximum likelihood estimation for this example: [pdf](materials/20200127_mle/20200127_mle_lecture_notes.pdf)
+        * We had a few extra minutes so we also defined an estimator (a random variable) and estimate (realized value of an estimator based on a sample, a number).
  * **After class**, please:
     * **Reading:** Over the next few classes we will cover material from Sections 8.1, 8.2, 8.3, and 8.5 of the text.  Give those sections in the book a brief skim.
     * **Homework 0** due 5 pm **today**, Mon, Jan 27
@@ -90,7 +94,8 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 
 #### Fri, Jan 31
  * **In class**, we will work on:
-    * Either more on maximum likelihood estimation, or method of moments.
+    * More on maximum likelihood estimation
+    * Maybe also method of moments.
  * **After class**, please:
     * **Homework 1** due 5 pm Wed, Feb 5
 ")
@@ -107,6 +112,7 @@ make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 #### Wed, Feb 05
  * **In class**, we will work on:
  * **After class**, please:
+    * **Homework 1** due 5 pm **today** Wed, Feb 5
 
 
 #### Fri, Feb 07
