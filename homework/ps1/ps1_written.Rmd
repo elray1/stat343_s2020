@@ -59,7 +59,7 @@ library(readr)
 library(ggplot2)
 library(dplyr)
 
-er_visits <- read_csv("~/Documents/teaching/2018/spring/stat343/stat343_s2018/homework/ps1/er_wait_times_emergent.csv")
+er_visits <- read_csv("http://www.evanlray.com/stat343_s2020/homework/ps1/er_wait_times_emergent.csv")
 ```
 
 ```{r, fig.height = 2}
