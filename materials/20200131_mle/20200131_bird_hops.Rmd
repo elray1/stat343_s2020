@@ -1,0 +1,66 @@
+---
+title: "Stat 343 MLE Practice: Saplings"
+output:
+  pdf_document:
+    keep_tex: true
+header-includes:
+   - \usepackage{booktabs}
+geometry: margin=1.5cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Bird Hops (Adapted from Rice problem 8.8)
+
+In an ecological study of the feeding behavior of birds, researchers counted the number of hops each of several birds took between flights.  The R code below reads in the data and makes an initial plot:
+
+```{r, warning=FALSE, message=FALSE, fig.height=3}
+bird_hops <- read_csv("http://www.evanlray.com/data/rice/Chapter%208/hops.csv") %>%
+  mutate(
+    num_hops = num_hops - 1
+  )
+
+ggplot(data = bird_hops, mapping = aes(x = num_hops)) +
+  geom_bar()
+
+bird_hops %>%
+  count(num_hops)
+```
+
+After subtracting 1 from the originally reported counts (as is done in the code above), the number of hops is 0 if the bird took off directly (0 hops before flight), 1 if the bird took one hop before taking off, and so on.  The researchers wanted to learn about the distribution of the number of hops taken before flight by this species.
+
+\newpage
+
+Let $X_i$ be the number of hops taken before flight by bird number $i$.
+
+#### (1) What distribution might you use to model $X_i$?
+
+\vspace{0.25cm}
+
+$X_i \sim$
+
+\vspace{0.25cm}
+
+#### (2) Find the likelihood function
+
+\vspace{5cm}
+
+#### (3) Find the log-likelihood function
+
+\vspace{5cm}
+
+#### (4) Find a critical point of the log-likelihood function
+
+\newpage
+
+#### (5) Verify that the critical point you found above gives a maximum of the log-likelihood.
+
+\vspace{8cm}
+
+#### (6) Write down your final answer for what the maximum likelihood estimator is.
+

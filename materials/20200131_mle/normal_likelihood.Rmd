@@ -1,0 +1,462 @@
+---
+title: "Normal Likelihood and Estimation"
+---
+
+## Pulse Rates
+
+We have a data set with the pulses (heart rate, beats per minute) for 130 subjects.  Can we fit a normal distribution to these values?
+
+```{r, echo = FALSE, message = FALSE}
+library(rgl)
+library(mvtnorm)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(readr)
+```
+
+```{r, echo = FALSE, message = FALSE}
+pulses <- read_csv("http://www.evanlray.com/data/jse/normtemp/bodytemp.csv")
+```
+
+```{r}
+head(pulses)
+ggplot(data = pulses, mapping = aes(x = hr)) +
+  geom_histogram(bins = 15)
+```
+
+To make the plots easier to think about, suppose we only had 5 subjects.
+
+```{r}
+pulses_5 <- pulses %>% slice(1:5) %>% arrange(hr)
+pulses_5
+ggplot(data = pulses_5) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  ylim(c(0, 1))
+```
+
+### Our Model
+
+Let $X_i$ be the heart rate for subject number $i$.  We adopt the model that these random variables are i.i.d. with
+
+$X_i \sim \text{Normal}(\mu, \sigma)$
+
+### Joint Probability Density if $X_i \sim \text{Normal}(73, 4^2)$
+
+```{r, echo = FALSE, fig.height = 2}
+mean_val <- 73
+sd_val <- 4
+ggplot(data = pulses_5) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[1], xend = pulses_5$hr[1], y = 0, yend = dnorm(pulses_5$hr[1], mean = mean_val, sd = sd_val)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[2], xend = pulses_5$hr[2], y = 0, yend = dnorm(pulses_5$hr[2], mean = mean_val, sd = sd_val)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[3], xend = pulses_5$hr[3], y = 0, yend = dnorm(pulses_5$hr[3], mean = mean_val, sd = sd_val)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[4], xend = pulses_5$hr[4], y = 0, yend = dnorm(pulses_5$hr[4], mean = mean_val, sd = sd_val)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[5], xend = pulses_5$hr[5], y = 0, yend = dnorm(pulses_5$hr[5], mean = mean_val, sd = sd_val)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  stat_function(fun = dnorm, args = list(mean = mean_val, sd = sd_val), color = "cornflowerblue") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_val, sd = sd_val)), color = "cornflowerblue") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(substitute(paste("Normal(", mean_val, ", ", sd_val^2, ")"), list(mean_val = mean_val, sd_val = sd_val)))
+```
+
+Individual probability densities are calculated as:
+
+$$f(x_i | \mu = 73, \sigma = 4) = (2 \pi 4^2)^{\frac{-1}{2}} \exp\left[ \frac{-1}{2 \cdot 4^2} (x_i - 73)^2 \right]$$
+
+For example, our first observation has $x_1 = 70$:
+
+$$f(70 | \mu = 73, \sigma = 4) = (2 \pi 4^2)^{\frac{-1}{2}} \exp\left[ \frac{-1}{2 \cdot 4^2} (70 - 73)^2 \right]$$
+
+In R, for all 5 observations this is calculated as:
+
+```{r}
+dnorm(pulses_5$hr, mean = 73, sd = 4)
+```
+
+The joint probability density is calculated as:
+
+$$f(x_1, x_2, x_3, x_4, x_5 | \mu = 73, \sigma = 4) = \prod_{i = 1}^5f(x_i | \mu = 73, \sigma = 4) = \prod_{i = 1}^5 (2 \pi 4^2)^{\frac{-1}{2}} \exp\left[ \frac{-1}{2 \cdot 4^2} (x_i - 73)^2 \right]$$
+
+In R, this is calculated as:
+
+```{r}
+dnorm(pulses_5$hr, mean = 73, sd = 4) %>% prod()
+```
+
+### Joint Probability Density for 3 Candidate Sets of Parameter Values
+
+Parameter Set 1: $X_i \sim \text{Normal}(73, 4^2)$
+
+Parameter Set 2: $X_i \sim \text{Normal}(73, 2^2)$
+
+Parameter Set 3: $X_i \sim \text{Normal}(76, 4^2)$
+
+
+```{r, echo = FALSE, fig.height = 2}
+mean_val1 <- 73
+sd_val1 <- 4
+p1 <- ggplot(data = pulses_5) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[1], xend = pulses_5$hr[1], y = 0, yend = dnorm(pulses_5$hr[1], mean = mean_val1, sd = sd_val1)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[2], xend = pulses_5$hr[2], y = 0, yend = dnorm(pulses_5$hr[2], mean = mean_val1, sd = sd_val1)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[3], xend = pulses_5$hr[3], y = 0, yend = dnorm(pulses_5$hr[3], mean = mean_val1, sd = sd_val1)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[4], xend = pulses_5$hr[4], y = 0, yend = dnorm(pulses_5$hr[4], mean = mean_val1, sd = sd_val1)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[5], xend = pulses_5$hr[5], y = 0, yend = dnorm(pulses_5$hr[5], mean = mean_val1, sd = sd_val1)),
+    color = "cornflowerblue",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  stat_function(fun = dnorm, args = list(mean = mean_val1, sd = sd_val1), color = "cornflowerblue") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_val1, sd = sd_val1)), color = "cornflowerblue") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(substitute(paste("Normal(", mean_val1, ", ", sd_val1^2, ")"), list(mean_val1 = mean_val1, sd_val1 = sd_val1)))
+
+
+mean_val2 <- 73
+sd_val2 <- 2
+p2 <- ggplot(data = pulses_5) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[1], xend = pulses_5$hr[1], y = 0, yend = dnorm(pulses_5$hr[1], mean = mean_val2, sd = sd_val2)),
+    color = "orange",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[2], xend = pulses_5$hr[2], y = 0, yend = dnorm(pulses_5$hr[2], mean = mean_val2, sd = sd_val2)),
+    color = "orange",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[3], xend = pulses_5$hr[3], y = 0, yend = dnorm(pulses_5$hr[3], mean = mean_val2, sd = sd_val2)),
+    color = "orange",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[4], xend = pulses_5$hr[4], y = 0, yend = dnorm(pulses_5$hr[4], mean = mean_val2, sd = sd_val2)),
+    color = "orange",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[5], xend = pulses_5$hr[5], y = 0, yend = dnorm(pulses_5$hr[5], mean = mean_val2, sd = sd_val2)),
+    color = "orange",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  stat_function(fun = dnorm, args = list(mean = mean_val2, sd = sd_val2), color = "orange") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_val2, sd = sd_val2)), color = "orange") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(substitute(paste("Normal(", mean_val2, ", ", sd_val2^2, ")"), list(mean_val2 = mean_val2, sd_val2 = sd_val2)))
+
+
+mean_val3 <- 76
+sd_val3 <- 4
+p3 <- ggplot(data = pulses_5) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[1], xend = pulses_5$hr[1], y = 0, yend = dnorm(pulses_5$hr[1], mean = mean_val3, sd = sd_val3)),
+    color = "purple",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[2], xend = pulses_5$hr[2], y = 0, yend = dnorm(pulses_5$hr[2], mean = mean_val3, sd = sd_val3)),
+    color = "purple",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[3], xend = pulses_5$hr[3], y = 0, yend = dnorm(pulses_5$hr[3], mean = mean_val3, sd = sd_val3)),
+    color = "purple",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[4], xend = pulses_5$hr[4], y = 0, yend = dnorm(pulses_5$hr[4], mean = mean_val3, sd = sd_val3)),
+    color = "purple",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_segment(
+    data = data.frame(x = pulses_5$hr[5], xend = pulses_5$hr[5], y = 0, yend = dnorm(pulses_5$hr[5], mean = mean_val3, sd = sd_val3)),
+    color = "purple",
+    mapping = aes(x = x, xend = xend, y = y, yend = yend)) +
+  geom_point(mapping = aes(x = hr, y = 0)) +
+  stat_function(fun = dnorm, args = list(mean = mean_val3, sd = sd_val3), color = "purple") +
+  geom_point(mapping = aes(x = hr, y = dnorm(hr, mean = mean_val3, sd = sd_val3)), color = "purple") +
+  xlim(c(60, 90)) +
+  ylim(c(0, 0.25)) +
+  theme_bw() +
+  ggtitle(substitute(paste("Normal(", mean_val3, ", ", sd_val3^2, ")"), list(mean_val3 = mean_val3, sd_val3 = sd_val3)))
+
+grid.arrange(p1, p2, p3, ncol = 3)
+```
+
+```{r}
+dnorm(pulses_5$hr, mean = 73, sd = 4) %>% prod()
+dnorm(pulses_5$hr, mean = 73, sd = 2) %>% prod()
+dnorm(pulses_5$hr, mean = 76, sd = 4) %>% prod()
+```
+
+### Plots of the likelihood function
+
+```{r, echo = FALSE}
+point1 <- matrix(c(73, 4, dnorm(pulses_5$hr, mean = 73, sd = 4) %>% prod()), nrow = 1)
+point2 <- matrix(c(73, 2, dnorm(pulses_5$hr, mean = 73, sd = 2) %>% prod()), nrow = 1)
+point3 <- matrix(c(76, 4, dnorm(pulses_5$hr, mean = 76, sd = 4) %>% prod()), nrow = 1)
+```
+
+```{r, echo = FALSE}
+calc_likelihood <- function(mu, sigma) {
+  dnorm(pulses_5$hr, mean = mu, sd = sigma) %>% prod()
+}
+```
+
+```{r, echo = FALSE}
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+mu_min <- mean(pulses_5$hr) - 3
+mu_max <- mean(pulses_5$hr) + 3
+sigma_min <- sd(pulses_5$hr) - 2
+sigma_max <- sd(pulses_5$hr) + 2 + 3
+mu <- seq(from = mu_min, to = mu_max, length = 201)
+sigma <- seq(from = sigma_min, to = sigma_max, length = 201)
+  
+parameter_grid <- expand.grid(
+  mu = mu,
+  sigma = sigma,
+  likelihood = NA
+)
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- calc_likelihood(parameter_grid$mu[i], parameter_grid$sigma[i])
+}
+```
+
+Here's a 3d plot of the likelihood function.  It's a surface since we have 2 parameters, $\mu$ and $\sigma$.
+
+```{r, echo = FALSE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(mu, sigma, xlim=c(mu_min, mu_max), ylim=c(sigma_min, sigma_max), zlim=c(0, z_max), zlab="L(mu, sigma)", xlab = "mu", ylab = "sigma", mouseMode = "zAxis", type = "s")
+surface3d(mu, sigma, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+points3d(point1, col = "#6495ED00", size = 8)
+points3d(point2, col = "#FFA50000", size = 8)
+points3d(point3, col = "#80008000", size = 8)
+
+#plotids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+#                  type="s", col=as.numeric(Species)))
+rglwidget(elementId = "plot_bivarnorm0")
+```
+
+
+Here's the log-likelihood:
+
+
+```{r, echo = FALSE}
+calc_loglikelihood <- function(mu, sigma) {
+  dnorm(pulses_5$hr, mean = mu, sd = sigma, log = TRUE) %>% sum()
+}
+```
+
+```{r, echo = FALSE}
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+mu_min <- mean(pulses_5$hr) - 3
+mu_max <- mean(pulses_5$hr) + 3
+sigma_min <- sd(pulses_5$hr) - 2
+sigma_max <- sd(pulses_5$hr) + 2 + 3
+mu <- seq(from = mu_min, to = mu_max, length = 201)
+sigma <- seq(from = sigma_min, to = sigma_max, length = 201)
+  
+parameter_grid <- expand.grid(
+  mu = mu,
+  sigma = sigma,
+  likelihood = NA
+)
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- calc_loglikelihood(parameter_grid$mu[i], parameter_grid$sigma[i])
+}
+```
+
+```{r, echo = FALSE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(mu, sigma, xlim=c(mu_min, mu_max), ylim=c(sigma_min, sigma_max), zlim=c(0, z_max), zlab="l(mu, sigma)", xlab = "mu", ylab = "sigma", mouseMode = "zAxis", type = "s")
+surface3d(mu, sigma, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+#points3d(point1, col = "#6495ED00", size = 8)
+#points3d(point2, col = "#FFA50000", size = 8)
+#points3d(point3, col = "#80008000", size = 8)
+
+#plotids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+#                  type="s", col=as.numeric(Species)))
+rglwidget(elementId = "plot_loglik5")
+```
+
+
+### Maximum Likelihood Estimates
+
+The maximum likelihood estimators for the model parameters are
+
+$$\hat{\mu}_{MLE} = \bar{X} = \frac{1}{n} \sum_{i = 1}^n X_i$$
+
+$$\hat{\sigma}_{MLE} = \sqrt{\frac{1}{n}\sum_{i = 1}^n (X_i - \bar{X})^2}$$
+
+For a particular data set we can calculate the maximum likelihood estimates:
+
+```{r}
+mle_est <- data.frame(
+  mu = mean(pulses_5$hr),
+  sigma = sqrt(mean((pulses_5$hr - mean(pulses_5$hr))^2))
+)
+
+mle_est
+```
+
+
+### Full Data Set
+
+How do the above pictures change if we use the full data set instead of 5 observations?
+
+
+```{r, echo = FALSE}
+calc_likelihood <- function(mu, sigma) {
+  dnorm(pulses$hr, mean = mu, sd = sigma) %>% prod()
+}
+```
+
+```{r, echo = FALSE}
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+mu_min <- mean(pulses_5$hr) - 3
+mu_max <- mean(pulses_5$hr) + 3
+sigma_min <- sd(pulses_5$hr) - 2
+sigma_max <- sd(pulses_5$hr) + 2 + 3
+mu <- seq(from = mu_min, to = mu_max, length = 201)
+sigma <- seq(from = sigma_min, to = sigma_max, length = 201)
+  
+parameter_grid <- expand.grid(
+  mu = mu,
+  sigma = sigma,
+  likelihood = NA
+)
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- calc_likelihood(parameter_grid$mu[i], parameter_grid$sigma[i])
+}
+```
+
+Here's a 3d (?) plot of the likelihood function.  It really is a surface since we have 2 parameters, $\mu$ and $\sigma$.
+
+```{r, echo = FALSE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(mu, sigma, xlim=c(mu_min, mu_max), ylim=c(sigma_min, sigma_max), zlim=c(0, z_max), zlab="L(mu, sigma)", xlab = "mu", ylab = "sigma", mouseMode = "zAxis", type = "s")
+surface3d(mu, sigma, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+#points3d(point1, col = "#6495ED00", size = 8)
+#points3d(point2, col = "#FFA50000", size = 8)
+#points3d(point3, col = "#80008000", size = 8)
+
+#plotids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+#                  type="s", col=as.numeric(Species)))
+rglwidget(elementId = "plot_full_lik")
+```
+
+Here's the probability of the data at the maximum likelihood parameter estimates:
+
+```{r}
+mu_hat <- mean(pulses$hr)
+sigma_hat <- sqrt(mean((pulses$hr - mean(pulses$hr))^2))
+dnorm(pulses$hr, mean = mu_hat, sd = sigma_hat)
+dnorm(pulses$hr, mean = mu_hat, sd = sigma_hat) %>% prod()
+```
+
+
+```{r, echo = FALSE}
+calc_loglikelihood <- function(mu, sigma) {
+  dnorm(pulses$hr, mean = mu, sd = sigma, log = TRUE) %>% sum()
+}
+```
+
+Finally, here is the log-likelihood function:
+
+```{r, echo = FALSE}
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+mu_min <- mean(pulses_5$hr) - 3
+mu_max <- mean(pulses_5$hr) + 3
+sigma_min <- sd(pulses_5$hr) - 2
+sigma_max <- sd(pulses_5$hr) + 2 + 3
+mu <- seq(from = mu_min, to = mu_max, length = 201)
+sigma <- seq(from = sigma_min, to = sigma_max, length = 201)
+  
+parameter_grid <- expand.grid(
+  mu = mu,
+  sigma = sigma,
+  likelihood = NA
+)
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- calc_loglikelihood(parameter_grid$mu[i], parameter_grid$sigma[i])
+}
+```
+
+```{r, echo = FALSE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 4/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+junk <- open3d()
+z_max <- joint_density_lim[2]
+plot3d(mu, sigma, xlim=c(mu_min, mu_max), ylim=c(sigma_min, sigma_max), zlim=c(0, z_max), zlab="l(mu, sigma)", xlab = "mu", ylab = "sigma", mouseMode = "zAxis", type = "s")
+surface3d(mu, sigma, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+#points3d(point1, col = "#6495ED00", size = 8)
+#points3d(point2, col = "#FFA50000", size = 8)
+#points3d(point3, col = "#80008000", size = 8)
+
+#plotids <- with(iris, plot3d(Sepal.Length, Sepal.Width, Petal.Length, 
+#                  type="s", col=as.numeric(Species)))
+rglwidget(elementId = "plot_loglikfull")
+```

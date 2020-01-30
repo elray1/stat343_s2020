@@ -86,7 +86,9 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 #### Wed, Jan 29
  * **In class**, we will work on:
     * **Quiz** on probability background.  This will be very similar to the examples from Wednesday Jan 22 and HW 0.  Please memorize everything on the \"Topics from probability\" document linked on the Resources page, and know how to use it.  You only need to know the informal statement of the Central Limit Theorem.
-    * More on maximum likelihood estimation
+    * More on maximum likelihood estimation:
+        * Example about seedlings: [pdf](materials/20200129_mle/20200127_mle_saplings.pdf) Solutions: [pdf](materials/20200129_mle/20200127_mle_saplings_solutions.pdf)
+        * Lab 2.  Solutions: [GitHub](https://github.com/mhc-stat343-s2020/lab02-solutions)
  * **After class**, please:
     * **Reading:** Continue working through Section 8.5.  Also give Section 8.4 a brief skim.
     * **Homework 1** due 5 pm Wed, Feb 5
@@ -94,10 +96,14 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 
 #### Fri, Jan 31
  * **In class**, we will work on:
-    * More on maximum likelihood estimation
-    * Maybe also method of moments.
+    * More on maximum likelihood estimation:
+        * Example about bird hops: [pdf](materials/20200131_mle/20200131_bird_hops.pdf)
+        * Example about normal distribution.
+            * Intro: [html](materials/20200131_mle/normal_likelihood.html)
+            * Lecture notes: [pdf](materials/20200131_mle/lecture_notes_normal_mle.pdf)
  * **After class**, please:
     * **Homework 1** due 5 pm Wed, Feb 5
+    * **Reading:** Read Section 8.4.
 ")
 ```
 
@@ -105,18 +111,24 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 #### Mon, Feb 03
  * **In class**, we will work on:
+    * Method of moments
  * **After class**, please:
     * **Homework 1** due 5 pm Wed, Feb 5
-
+    * **Reading**: Over the next few days, we'll explore using Newton's method to numerically optimize the log-likelihood function.  Wikipedia is a reasonably good source; you could give the following a skim:
+        * Remind yourself about how Taylor's theorem works by skimming the [Wikipedia article] and/or looking at the last page of the [review of topics from calculus](resources/calculus/calculus.pdf) posted on the Resources page of the course website.  We'll review this at the beginning of class on Wednesday too.
+        * [Newton's method for root finding](https://en.wikipedia.org/wiki/Newton%27s_method)
+        * [Newton's method for optimization](https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization)
 
 #### Wed, Feb 05
  * **In class**, we will work on:
+    * Newton's method for numerical maximization of the log-likelihood function
  * **After class**, please:
     * **Homework 1** due 5 pm **today** Wed, Feb 5
 
 
 #### Fri, Feb 07
  * **In class**, we will work on:
+    * Newton's method for numerical maximization of the log-likelihood function
  * **After class**, please:
 ")
 ```
