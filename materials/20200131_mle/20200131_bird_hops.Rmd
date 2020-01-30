@@ -1,5 +1,5 @@
 ---
-title: "Stat 343 MLE Practice: Saplings"
+title: "Stat 343 MLE Practice: Bird Hops"
 output:
   pdf_document:
     keep_tex: true
