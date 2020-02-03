@@ -71,7 +71,7 @@ make_week_box("week1", FALSE, "Week 1: Jan 20 -- Jan 24", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
+make_week_box("week2", FALSE, "Week 2: Jan 27 -- Jan 31", "
 #### Mon, Jan 27
  * **In class**, we will work on:
     * Start on maximum likelihood estimation.
@@ -111,7 +111,10 @@ make_week_box("week2", TRUE, "Week 2: Jan 27 -- Jan 31", "
 make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 #### Mon, Feb 03
  * **In class**, we will work on:
-    * Method of moments
+    * Example where analytically maximizing the likelihood doesn't work: [pdf](materials/20200203_mom/20200203_motivation_Gamma.pdf)
+    * Method of moments.  Lecture notes: [pdf](materials/20200203_mom/lecture_notes.pdf)
+    * Reminder about Taylor's theorem, from calculus review handout (linked on resources page)
+    * Intro to Newton's method for optimization.  Slides: [pdf](materials/20200205_newtons_method/Newton_for_Optimization.pdf)
  * **After class**, please:
     * **Homework 1** due 5 pm Wed, Feb 5
     * **Reading**: Over the next few days, we'll explore using Newton's method to numerically optimize the log-likelihood function.  Wikipedia is a reasonably good source; you could give the following a skim:
@@ -128,6 +131,7 @@ make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 
 #### Fri, Feb 07
  * **In class**, we will work on:
+    * **Quiz** on maximum likelihood.  I'll ask you to find the maximum likelihood estimator for a model with 1 unknown parameter.
     * Newton's method for numerical maximization of the log-likelihood function
  * **After class**, please:
 ")
