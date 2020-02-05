@@ -370,7 +370,7 @@ A non-negative real number.  Often used as a model for waiting times -- but need
 parameters & $\alpha \geq 0$: shape parameter, $\lambda > 0$: rate parameter \\
 p.f. & $f(x | \alpha, \lambda) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x}$ \\
 Mean & $\frac{\alpha}{\lambda}$ \\
-Variance & ${\alpha}{\lambda^2}$ \\
+Variance & $\frac{\alpha}{\lambda^2}$ \\
 R functions & {\tt dgamma(..., shape = $\alpha$, rate = $\lambda$), pgamma, qgamma, rgamma} \\
 \bottomrule
 \end{tabular}
