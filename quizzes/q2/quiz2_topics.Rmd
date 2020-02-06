@@ -1,0 +1,24 @@
+---
+title: "Stat 343 - Potential Quiz 2 Topics/Things to Know"
+output: pdf_document
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+library(dplyr)
+library(ggplot2)
+```
+
+ * I will ask you to find a maximum likelihood estimator for a model with 1 unknown parameter by:
+    * finding the likelihood function
+    * finding the log-likelihood function
+    * setting the first derivative of the log-likelihood to 0
+    * solving for the parameter
+    * finding the second derivative and checking that it is negative
+    * writing the final answer as a random variable.
+ * You should know why you are doing each of those steps.  In particular, you should also be able to explain what a likelihood function is (probability of the observed data, as a function of unknown model parameters) and why we would want to estimate parameters by maximizing the likelihood (we want the parameters that are most consistent with the observed data in the sense that they assign highest probability to the observed data within the constraints of the probabilistic model that has been specified).
+ * You should be able to explain the difference between an estimate (the numeric value used to estimate a model parameter based on an observed data set) and an estimator (a random variable whose value would be the estimate of a parameter once the data is observed -- each sample we take will be different, and so will result in a different estimate.  The estimator is written in terms of the random variables $X_1, \ldots, X_n$ representing the quantities in a future sample, or random variables representing a probabilistic model for how the data were or will be generated.)
+ * For the purpose of this quiz, the only probability you need to know is that if a set of random variables are independent, their joint pdf or pmf is the product of the marginal pdfs or pmfs.
+ * I will give you the handout about algebra and calculus (at http://www.evanlray.com/stat343_s2020/resources/calculus/calculus.pdf), but I think that if you need to refer to this regularly you will have a hard time doing the quiz problem in a reasonable amount of time.  In particular, it's really worth memorizing and practicing how to work with products, sums, logs, and exponents if you're not comfortable with them.
+ * I will also give you the pdf or pmf of the distribution we are working with, so you don't need to memorize these for any probability distributions.
+ * The quiz will **not** cover stuff about $\chi^2$, $t$, or $F$ distributions, but that will be on our midterm.
