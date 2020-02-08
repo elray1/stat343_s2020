@@ -1,0 +1,285 @@
+---
+title: "Zero Inflated Poisson example"
+---
+
+## Arrests data
+
+These data and the description below are from the carData package:
+
+We have "data on police treatment of individuals arrested in Toronto for simple possession of small quantities of marijuana. The data are part of a larger data set featured in a series of articles in the Toronto Star newspaper."
+
+One of the variables in the data set is the "number of police data bases (of previous arrests, previous convictions, parole status, etc.) on which the arrestee's name appeared; a numeric vector."
+
+```{r, echo = FALSE, message = FALSE}
+library(rgl)
+library(mvtnorm)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(carData)
+```
+
+```{r, echo = FALSE, message = FALSE}
+head(Arrests)
+dim(Arrests)
+
+ggplot(data = Arrests, mapping = aes(x = checks)) +
+  geom_histogram(binwidth = 1) +
+  theme_bw()
+```
+
+## Poisson Fit
+
+```{r}
+poisson_fit <- data.frame(
+  x = seq(from = 0, to = max(Arrests$checks)),
+  pmf = dpois(seq(from = 0, to = max(Arrests$checks)), lambda = mean(Arrests$checks))
+)
+
+ggplot(data = Arrests, mapping = aes(x = checks)) +
+  geom_histogram(binwidth = 1, mapping = aes(y = ..density..)) +
+  geom_point(data = poisson_fit, mapping = aes(x = x, y = pmf), color = "orange") +
+  geom_line(data = poisson_fit, mapping = aes(x = x, y = pmf), color = "orange") +
+  theme_bw()
+```
+
+## Zero inflated Poisson fit
+
+### Method of Moments
+
+$E(X) = (1 - \pi) \lambda$
+
+$Var(X) = \lambda (1 - \pi) (1 + \pi \lambda)$
+
+We didn't have time for this in class, but as an exercise you might try finding the method of moments estimators of $\pi$ and $\lambda$.
+
+### Maximum Likelihood via Newton's Method
+
+The log likelihood is
+
+\begin{align*}
+\ell(\pi, \lambda) &= \prod_{i: x_i = 0} P(X_i = 0) \prod_{i: x_i \neq 0}P(X_i = x_i) \\
+&= \prod_{i: x_i = 0} \left\{ \pi + (1 - \pi) \exp(-\lambda) \right\} \prod_{i: x_i \neq 0} (1 - \pi) \frac{\lambda^{x_i} \exp(-\lambda)}{x_i!} \\
+\end{align*}
+
+The first and second derivatives are complicated.  The functions below calculate the gradient vector and Hessian matrix.
+
+```{r}
+loglik <- function(params, n0, n, sum_x) {
+  pi <- params[1]
+  lambda <- params[2]
+  
+  term1 <- n0 * log(pi + (1 - pi) * exp(-lambda))
+  term2 <- (n - n0) * log(1 - pi)
+  term3 <- sum_x * log(lambda)
+  term4 <- -lambda * (n - n0)
+  
+  return(term1 + term2 + term3 + term4)
+}
+
+calc_dl_dpi <- function(pi, lambda, n0, n, sum_x) {
+  term1 <- n0 * (1 - exp(-lambda)) / (pi  + (1 - pi)*exp(-lambda))
+  term2 <- -1 * (n - n0) / (1 - pi)
+  return(
+    term1 + term2
+  )
+}
+
+calc_dl_dlambda <- function(pi, lambda, n0, n, sum_x) {
+  term1 <- -1 * n0 * (1 - pi) * exp(-lambda) / (pi  + (1 - pi)*exp(-lambda))
+  term2 <- sum_x / lambda
+  term3 <- -(n - n0)
+  return(
+    term1 + term2 + term3
+  )
+}
+
+calc_grad <- function(pi, lambda, n0, n, sum_x) {
+  return(matrix(c(
+    calc_dl_dpi(pi, lambda, n0, n, sum_x),
+    calc_dl_dlambda(pi, lambda, n0, n, sum_x)
+  )))
+}
+
+calc_dl2_dpi2 <- function(pi, lambda, n0, n, sum_x) {
+  term1 <- -n0 * (1 - exp(lambda))^2 / (pi  + (1 - pi)*exp(-lambda))^2
+  term2 <- -1 * (n - n0) / (1 - pi)^2
+  return(
+    term1 + term2
+  )
+}
+
+calc_dl2_dlambda2 <- function(pi, lambda, n0, n, sum_x) {
+  term1 <- n0 * (1 - pi)^2 / (pi * exp(lambda) + 1 - pi)^2
+  term2 <- n0 * (1 - pi) / (pi * exp(lambda) + 1 - pi)
+  term3 <- -1 * sum_x / lambda^2
+  return(
+    term1 + term2 + term3
+  )
+}
+
+calc_dl2_dpi_dlambda <- function(pi, lambda, n0, n, sum_x) {
+  term1 <- n0 * exp(lambda) / (pi * exp(lambda) + (1 - pi))^2
+  return(term1)
+}
+
+calc_hess <- function(pi, lambda, n0, n, sum_x) {
+  hess <- matrix(NA, nrow = 2, ncol = 2)
+  hess[1, 1] <- calc_dl2_dpi2(pi, lambda, n0, n, sum_x)
+  hess[2, 2] <- calc_dl2_dlambda2(pi, lambda, n0, n, sum_x)
+  hess[1, 2] <- hess[2, 1] <- calc_dl2_dpi_dlambda(pi, lambda, n0, n, sum_x)
+  return(hess)
+}
+```
+
+We update the parameter vector $\theta = \begin{bmatrix}\pi \\ \lambda \end{bmatrix}$ via:
+
+$$\theta^{(i+1)} = \theta^{(i)} - H^{-1} \nabla \ell(\pi, \lambda | x_1, \ldots, x_n)$$
+
+```{r}
+update_step <- function(pi, lambda, n0, n, sum_x) {
+  theta <- matrix(c(pi, lambda))
+  grad <- calc_grad(pi, lambda, n0, n, sum_x)
+  hess <- calc_hess(pi, lambda, n0, n, sum_x)
+  theta_new <- theta - solve(hess, grad)
+  return(theta_new)
+}
+```
+
+```{r, echo = FALSE, eval = FALSE}
+library(numDeriv)
+hessian(loglik, x = c(0.5, mean(Arrests$checks)), n0 = n0, n = n, sum_x = sum_x)
+calc_hess(pi = 0.5, lambda = mean(Arrests$checks), n0 = n0, n = n, sum_x = sum_x)
+```
+
+
+I picked starting values for the parameters that were vaguely plausible:
+
+ * $pi^{(0)}$ is the proportion of observations with $x_i = 0$
+ * $\lambda^{0}$ is the maximum likelihood estimate for a Poisson distribution
+
+```{r}
+pi <- mean(Arrests$checks == 0)
+lambda <- mean(Arrests$checks)
+
+n0 <- sum(Arrests$checks == 0)
+n <- nrow(Arrests)
+sum_x <- sum(Arrests$checks)
+
+max_iter <- 1000
+tol <- 1e-8
+pi_history <- rep(NA, max_iter)
+lambda_history <- rep(NA, max_iter)
+loglikelihood_history <- rep(NA, max_iter)
+
+i <- 1
+last_change <- Inf
+while(i <= max_iter && last_change > tol) {
+  new_params <- update_step(pi, lambda, n0, n, sum_x)
+  
+  last_change <- max(abs(pi - new_params[1, 1]), abs(lambda - new_params[2, 1]))
+  pi_history[i] <- pi <- new_params[1, 1]
+  lambda_history[i] <- lambda <- new_params[2, 1]
+  loglikelihood_history[i] <- loglik(new_params, n0, n, sum_x)
+  
+  print(paste0("iteration ", i, ": pi = ", pi, "; lambda = ", lambda, "; last change = ", last_change))
+  
+  i <- i + 1
+}
+```
+
+Here are plots of the distribution estimates at each step of the Newton optimization procedure:
+
+```{r}
+zip_pm <- function(x, pi, lambda) {
+  return(
+    ifelse(x == 0, pi, 0) + (1 - pi)*dpois(x, lambda)
+  )
+}
+
+zinf_fit <- purrr::map_dfr(
+  seq_len(i - 1),
+  function(i) {
+    data.frame(
+      x = seq(from = 0, to = max(Arrests$checks)),
+      pmf = zip_pm(seq(from = 0, to = max(Arrests$checks)), pi_history[i], lambda_history[i]),
+      iteration = i
+    )
+  }
+)
+
+ggplot(data = Arrests, mapping = aes(x = checks, y = ..density..)) +
+  geom_histogram(binwidth = 1) +
+  geom_point(data = zinf_fit, mapping = aes(x = x, y = pmf, group = iteration, color = iteration)) +
+  geom_line(data = zinf_fit, mapping = aes(x = x, y = pmf, group = iteration, color = iteration)) +
+  scale_color_gradientn(colors = c("blue", "purple", "orange"), values = c(0, 0.05, 1)) +
+  theme_bw()
+```
+
+Here's a plot of the Taylor-series approximation to the log-likelihood used at the first iteration:
+
+```{r, echo = FALSE}
+pi0 <- mean(Arrests$checks == 0)
+lambda0 <- mean(Arrests$checks)
+
+# Set up a grid of values to use in making a plot
+# I chose these through experimentation to make the plot look "nice"
+pi_min <- 0.1
+pi_max <- 0.5
+lambda_min <- 1
+lambda_max <- 3
+pi <- seq(from = pi_min, to = pi_max, length = 101)
+lambda <- seq(from = lambda_min, to = lambda_max, length = 101)
+  
+parameter_grid <- expand.grid(
+  pi = pi,
+  lambda = lambda,
+  likelihood = NA,
+  likelihood_taylor = NA
+)
+
+loglik_taylor_approx <- function(params, n0, n, sum_x) {
+  params_mat <- matrix(params) - matrix(c(pi0, lambda0))
+  pi <- params[1]
+  lambda <- params[2]
+  grad <- calc_grad(pi, lambda, n0, n, sum_x)
+  hess <- calc_hess(pi, lambda, n0, n, sum_x)
+  return(
+    loglik(c(pi0, lambda0), n0, n, sum_x) +
+    t(params_mat) %*% matrix(grad) +
+    0.5 * t(params_mat) %*% hess %*% params_mat
+  )
+}
+
+for(i in seq_len(nrow(parameter_grid))) {
+  parameter_grid$likelihood[i] <- loglik(params = c(parameter_grid$pi[i], parameter_grid$lambda[i]), n0, n, sum_x)
+  parameter_grid$likelihood_taylor[i] <- loglik_taylor_approx(params = c(parameter_grid$pi[i], parameter_grid$lambda[i]), n0, n, sum_x)
+}
+parameter_grid$likelihood_taylor[parameter_grid$likelihood_taylor < min(parameter_grid$likelihood)] <- NA
+```
+
+Here's a 3d plot of the likelihood function (orange and green) and the Taylor approximation at the starting point (purple and pink):
+
+```{r, echo = FALSE, message = FALSE}
+color_n <- 1000 # number of colors used
+
+joint_density_lim <- range(parameter_grid$likelihood)
+joint_density_range <- joint_density_lim[2] - joint_density_lim[1]
+joint_density_colorlut <- rev(rainbow(1000, start = 0, end = 2/6)) # height color lookup table
+joint_density_col <- joint_density_colorlut[ floor(color_n * (parameter_grid$likelihood - joint_density_lim[1])/joint_density_range) + 1 ]
+
+approx_lim <- range(parameter_grid$likelihood_taylor, na.rm = TRUE)
+approx_range <- approx_lim[2] - approx_lim[1]
+approx_colorlut <- rev(rainbow(1000, start = 4/6, end = 0.99)) # height color lookup table
+approx_col <- approx_colorlut[ floor(color_n * (parameter_grid$likelihood_taylor - approx_lim[1])/approx_range) + 1 ]
+
+junk <- open3d()
+z_min <- max(joint_density_lim[1], approx_lim[1])
+z_max <- max(joint_density_lim[2], approx_lim[2])
+plot3d(pi, lambda, xlim=c(pi_min, pi_max), ylim=c(lambda_min, lambda_max), zlim=c(z_min, z_max), zlab="l(pi, lambda)", xlab = "pi", ylab = "lambda", mouseMode = "zAxis", type = "s")
+surface3d(pi, lambda, parameter_grid$likelihood, alpha = 0.3, col = joint_density_col)
+surface3d(pi, lambda, parameter_grid$likelihood_taylor, alpha = 0.3, col = approx_col)
+
+rglwidget(elementId = "plot_bivarnorm0")
+```

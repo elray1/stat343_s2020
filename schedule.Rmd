@@ -108,7 +108,7 @@ make_week_box("week2", FALSE, "Week 2: Jan 27 -- Jan 31", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
+make_week_box("week3", FALSE, "Week 3: Feb 03 -- Feb 07", "
 #### Mon, Feb 03
  * **In class**, we will work on:
     * Example where analytically maximizing the likelihood doesn't work: [pdf](materials/20200203_mom/20200203_motivation_Gamma.pdf)
@@ -125,6 +125,8 @@ make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 #### Wed, Feb 05
  * **In class**, we will work on:
     * Newton's method for numerical maximization of the log-likelihood function
+        * Slides posted Monday
+        * Start Zero-inflated Poisson example: [html](materials/20200205_newtons_method/ZIP_newton.html)
  * **After class**, please:
     * **Homework 1** due 5 pm **today** Wed, Feb 5
 
@@ -133,6 +135,7 @@ make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
  * **In class**, we will work on:
     * **Quiz** on maximum likelihood.  I'll ask you to find the maximum likelihood estimator for a model with 1 unknown parameter.
     * Newton's method for numerical maximization of the log-likelihood function
+        * Finish Zero-inflated Poisson example we started last class.
  * **After class**, please:
 ")
 ```
@@ -141,17 +144,23 @@ make_week_box("week3", TRUE, "Week 3: Feb 03 -- Feb 07", "
 make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
 #### Mon, Feb 10
  * **In class**, we will work on:
+    * Numerical maximum likelihood using Stan
  * **After class**, please:
+    * **Homework 2** due 5pm Friday Feb 14
 
 
 #### Wed, Feb 12
  * **In class**, we will work on:
+    * Sampling distributions
  * **After class**, please:
+    * **Homework 2** due 5pm Friday Feb 14
 
 
 #### Fri, Feb 14
  * **In class**, we will work on:
+    * More sampling distributions; bias, variance, MSE
  * **After class**, please:
+    * **Homework 2** due 5pm **today** Friday Feb 14
 ")
 ```
 

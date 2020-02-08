@@ -27,3 +27,16 @@ title: "Homework"
 |              | R part:                                       |           |       |                                                    |
 |              | Distributed via GitHub.                       |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+|    2         | Method of moments and numerical approaches to | 5 pm,     |  1    |                                                    |
+|              | maximum likelihood estimation.                | 2/14/2020 |       |                                                    |
+|              | Note: for this assignment, do the written     |           |       |                                                    |
+|              | part before the R part.                       |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps2/ps2_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps2/ps2_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part:                                       |           |       |                                                    |
+|              | Distributed via GitHub.                       |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+
