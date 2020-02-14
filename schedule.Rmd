@@ -145,20 +145,24 @@ make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
 #### Mon, Feb 10
  * **In class**, we will work on:
     * Numerical maximum likelihood using Stan
+        * Handout: [pdf](materials/20200207_stan_optimization/20200207_stan_optimization.pdf)
+        * Lab 3
  * **After class**, please:
     * **Homework 2** due 5pm Friday Feb 14
 
 
 #### Wed, Feb 12
  * **In class**, we will work on:
-    * Sampling distributions
+    * Sampling distributions, bias, variance, and mean squared error.  Lecture notes: [pdf](materials/20200212_bias_var_mse/lecture_notes.pdf)
  * **After class**, please:
     * **Homework 2** due 5pm Friday Feb 14
 
 
 #### Fri, Feb 14
  * **In class**, we will work on:
-    * More sampling distributions; bias, variance, MSE
+    * Example of bias, variance, MSE for estimators of the variance of a normal distribution.  Lecture notes: [pdf](materials/20200214_mse_bayes_set_up/lecture_notes.pdf)
+    * We didn't have time to get to Lab 4, but maybe you could take a quick look at it on your own?
+    * Motivation for subjective probability intervals: [pdf](materials/20200214_mse_bayes_set_up/20200214_subjective_intervals.pdf)
  * **After class**, please:
     * **Homework 2** due 5pm **today** Friday Feb 14
 ")
@@ -168,16 +172,21 @@ make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
 make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
 #### Mon, Feb 17
  * **In class**, we will work on:
+    * Wrap up lab on bias, variance, and MSE
+    * Wrap up subjective probability intervals/subjective interpretation of probability
+    * Intro to Bayesian inference
  * **After class**, please:
 
 
 #### Wed, Feb 19
  * **In class**, we will work on:
+    * More on Bayesian inference
  * **After class**, please:
 
 
 #### Fri, Feb 21
  * **In class**, we will work on:
+    * Bayesian stuff!
  * **After class**, please:
 ")
 ```
@@ -186,16 +195,19 @@ make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
 make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 #### Mon, Feb 24
  * **In class**, we will work on:
+    * Start on MCMC?
  * **After class**, please:
 
 
 #### Wed, Feb 26
  * **In class**, we will work on:
+    * More MCMC?
  * **After class**, please:
 
 
 #### Fri, Feb 28
  * **In class**, we will work on:
+    * Maybe more time for MCMC?
  * **After class**, please:
 ")
 ```
