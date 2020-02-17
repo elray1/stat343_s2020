@@ -175,19 +175,26 @@ make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
     * Wrap up lab on bias, variance, and MSE
     * Wrap up subjective probability intervals/subjective interpretation of probability
     * Intro to Bayesian inference
+        * Lecture notes on Binomial example: [pdf](materials/20200217_bayes_binomial/lecture_notes.pdf)
+        * We also did the first example on this worksheet: [pdf](materials/20200219_bayes_practice/20200219_bayes_practice.pdf)
  * **After class**, please:
 
 
 #### Wed, Feb 19
  * **In class**, we will work on:
-    * More on Bayesian inference
+    * More on Bayesian inference:
+        * Lab 6
+        * Finish examples from practice worksheet last class.
  * **After class**, please:
+    * **Homework 3** due Wed. Feb 26
 
 
 #### Fri, Feb 21
  * **In class**, we will work on:
-    * Bayesian stuff!
+    * Bayesian credible intervals: posterior percentiles, highest posterior density
+    * Another example to illustrate?
  * **After class**, please:
+    * **Homework 3** due Wed. Feb 26
 ")
 ```
 
@@ -197,12 +204,14 @@ make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
  * **In class**, we will work on:
     * Start on MCMC?
  * **After class**, please:
+    * **Homework 3** due Wed. Feb 26
 
 
 #### Wed, Feb 26
  * **In class**, we will work on:
     * More MCMC?
  * **After class**, please:
+    * **Homework 3** due **today**, Wed. Feb 26
 
 
 #### Fri, Feb 28
