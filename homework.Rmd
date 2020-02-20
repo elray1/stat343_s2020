@@ -39,4 +39,16 @@ title: "Homework"
 |              | R part:                                       |           |       |                                                    |
 |              | Distributed via GitHub.                       |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+|    3         | Bias, variance, MSE, and Bayesian inference   | 5 pm,     |  1    |                                                    |
+|              | with conjugate priors.                        | 2/26/2020 |       |                                                    |
+|              | Note: for this assignment, do the written     |           |       |                                                    |
+|              | part before the R part.                       |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps3/ps3_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps3/ps3_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part:                                       |           |       |                                                    |
+|              | Distributed via GitHub.                       |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
 
