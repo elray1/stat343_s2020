@@ -141,7 +141,7 @@ make_week_box("week3", FALSE, "Week 3: Feb 03 -- Feb 07", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
+make_week_box("week4", FALSE, "Week 4: Feb 10 -- Feb 14", "
 #### Mon, Feb 10
  * **In class**, we will work on:
     * Numerical maximum likelihood using Stan
@@ -169,7 +169,7 @@ make_week_box("week4", TRUE, "Week 4: Feb 10 -- Feb 14", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
+make_week_box("week5", FALSE, "Week 5: Feb 17 -- Feb 21", "
 #### Mon, Feb 17
  * **In class**, we will work on:
     * Wrap up lab on bias, variance, and MSE
@@ -191,8 +191,11 @@ make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
 
 #### Fri, Feb 21
  * **In class**, we will work on:
-    * Bayesian credible intervals: posterior percentiles, highest posterior density
-    * Another example to illustrate?
+    * Bayesian credible intervals: posterior percentiles, highest posterior density.  Partial lecture notes are here, but I also discussed highest posterior density: [pdf](materials/20200221_more_bayes_practice/lecture_notes_bayes_point_interval_estimates.pdf)
+    * Start on analysis of normal distribution from a Bayesian perspective.
+        * Lecture notes: [pdf](materials/20200221_more_bayes_practice/bayes_normal_notes.pdf).  Note that for case 1 (unknown mean, known variance) I mixed up the notation a little towards the end of page 1 of these notes.  The stuff I wrote in class was correct.
+        * Plots illustrating MSE for Bayesian estimator of the mean when the variance is known: [pdf](materials/20200221_more_bayes_practice/20200221_normal_univar_bayes.pdf)
+    * Another practice example we didn't have time for: [pdf](materials/20200221_more_bayes_practice/20200221_more_bayes_practice.pdf)
  * **After class**, please:
     * **Homework 3** due Wed. Feb 26
 ")
@@ -202,21 +205,25 @@ make_week_box("week5", TRUE, "Week 5: Feb 17 -- Feb 21", "
 make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 #### Mon, Feb 24
  * **In class**, we will work on:
-    * Start on MCMC?
+    * Finish examples of estimation for normal distribution from last class.
+    * Introduce Monte Carlo integration:
+        * Lecture notes: [pdf](materials/20200224_mc_integration/numerical_integration_notes.pdf)
+        * Examples: [pdf](materials/20200224_mc_integration/20200224_mc_integration.pdf)
  * **After class**, please:
     * **Homework 3** due Wed. Feb 26
 
 
 #### Wed, Feb 26
  * **In class**, we will work on:
-    * More MCMC?
+    * Finish examples from last class
+    * Introduce MCMC
  * **After class**, please:
     * **Homework 3** due **today**, Wed. Feb 26
 
 
 #### Fri, Feb 28
  * **In class**, we will work on:
-    * Maybe more time for MCMC?
+    * Lab on MCMC
  * **After class**, please:
 ")
 ```

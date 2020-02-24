@@ -1,0 +1,64 @@
+---
+title: "Stat 343 Bayes Practice with Conjugate Priors"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Fire Insurance Losses
+
+We will work with a data set with losses due to fires covered by Copenhagen Reinsurance.  There are 2167 fire losses over the time period from 1980 to 1990.  The loss amounts are in millions of Danish Krone (DKK), inflation adjusted to 1985 values.  The minimum loss covered was 1 million DKK, so the smallest observation in the data set is 1 (apparently the inflation adjustment did not affect that observation, or it was rounded up to 1 million if so).
+
+References:
+
+McNeil, A. (1996), Estimating the Tails of Loss Severity Distributions using Extreme Value Theory, ASTIN Bull
+
+Davison, A. C. (2003) Statistical Models. Cambridge University Press. Page 278.
+
+Dutang, C. (2019) CASdatasets: Insurance datasets.  https://github.com/dutangc/CASdatasets
+
+The following code reads in the data and makes a plot:
+
+```{r, warn = FALSE, message = FALSE, fig.height = 2}
+fire_losses <- read_csv("http://www.evanlray.com/data/CAS/danishuni.csv")
+ggplot(data = fire_losses, mapping = aes(x = Loss)) +
+  geom_histogram(mapping = aes(y = ..density..), boundary = 0, bins = 100) +
+  theme_bw()
+```
+
+Here is a summary of the loss amounts:
+
+```{r}
+summary(fire_losses$Loss)
+```
+
+We can see from these results that the losses are skewed right, with a minimum value of 1.  A probability model for random variables with these characteristics is the Pareto distribution.  The Pareto distribution has two parameters, $x_0 > 0$ and $\theta > 0$.  If $X \sim \text{Pareto}(x_0, \theta)$, then its probability density function (pdf) is:
+
+$f(x | x_0, \theta) = \frac{\theta x_0^\theta}{x^{\theta + 1}}$ on the support $x \in [x_0, \infty)$.
+
+In our case, the lower bound of the support of the distribution is 1, since the minimum covered loss by this insurance company was 1 million DKK.  Let's fix $x_0 = 1$ and think about how we might estimate the parameter $\theta$.  Our model is
+
+$X_1, \ldots, X_n \simiid \text{Pareto}(1, \theta)$.
+
+\newpage
+
+#### (1) Show that the Gamma distribution is a conjugate prior for $\alpha$ in the Pareto model.  What are the posterior parameters when $x_0 = 1$?
+
+If we use the prior $\Theta \sim \text{Gamma}(\alpha, \beta)$, then $\Theta$ has pdf $f_{\Theta}(\theta) = \frac{\beta^\alpha}{\Gamma(\alpha)} \theta^{\alpha - 1} e^{-\beta \theta}$
+
+The algebra here is a little tricky.  Use the following facts:
+
+ * $a = \exp(\log(a))$
+ * $\log(b^c) = c \log(b)$
+ * $\exp(d + e) = \exp(d) \exp(e)$
+ * When finding the posterior distribution for $\theta$, you can ignore all multiplicative constants that don't involve $\theta$ (knowing that they will be incorporated into a multiplicative term that is there to ensure the pdf integrates to 1).
+

@@ -1,0 +1,60 @@
+---
+title: "Stat 343 Practice with Monte Carlo Integration"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Fish biology
+
+This example is adapted from examples 10.4 and 11.6 in *Mathematical Statistics with Resampling and R* by Chihara and Hesterberg (2011).  They write:
+
+> "A marine biologist is investigating a species of trout in a certain area of California.  She assumes that the lengths of these fish are normally distributed with mean $\mu$ (cm) and variance $8^2$.  She obtains a random sample of 15 fish and records their lengths $X_1, \ldots, X_{15} \sim \text{Normal}(\mu, 8^2)$.  Based on her knowledge of this species at other locations, she [uses a prior distribution of] $\mu \sim \text{Normal}(50, 6^2)$.  Suppose the mean of this random sample is $\bar{x} = 45$."
+
+By plugging $8^2$, $50$, $6^2$, and $45$ into the formula we derived last class, it can be shown that the posterior distribution is $\mu | x_1, \ldots, x_{15} \sim \text{Normal}(45.53, 1.953^2)$
+
+Chihara and Hesterberg continue:
+
+> Biologists have determined that the relationship between the weight $W$ and length $X$ of a fish is apprroximately $W = aX^b$ for constant $a$ and $b$ that are determined empirically for any given species (Ricker (1973, 1975)).  Suppose for this species, $W = 0.088 \times X^{3.069}$ g.
+
+To summarize, we have the following:
+
+**Posterior distribution for $\mu$ based on our sample of size 15:**
+
+$\mu | x_1, \ldots, x_{15} \sim \text{Normal}(45.53, 1.953^2)$
+
+**For a new, as-yet unobserved fish from the population of this species of trout from California:**
+
+$X | \mu \sim \text{Normal}(\mu, 8^2)$
+
+$W = 0.088 \times X^{3.069}$
+
+#### (1) How could you find the posterior distribution of $X | x_1, \ldots, x_{15}$?  Write down the set up as a suitable integral.
+
+\vspace{3cm}
+
+#### (2) Suppose you have available the pdf $f_{X | x_1, \ldots, x_{15}}(x | x_1, \ldots, x_{15})$ for the posterior distributon of $X | x_1, \ldots, x_{15}$.  How could you find the expected value of $W | x_1, \ldots, x_{15}$?  Write down the set up as a suitable integral.
+
+\newpage
+
+#### (3) Suppose you have a sample from the posterior distribution of $X | x_1, \ldots, x_{15}$.  How could you use this sample to approximately evaluate the integral you set up in part (2)?
+
+\vspace{5cm}
+
+#### (4) Suppose you have available the pdf $f_{X | x_1, \ldots, x_{15}}(x | x_1, \ldots, x_{15})$ for the posterior distributon of $X | x_1, \ldots, x_{15}$.  How could you find the posterior probability that a newly sampled fish of this species in California will have a weight $W$ between 25 and 30 pounds?  Write down the set up as a suitable integral.
+
+\vspace{5cm}
+
+#### (5) Suppose you have a sample from the posterior distribution of $X | x_1, \ldots, x_{15}$.  How could you use this sample to evaluate the integral you set up in part (4)?
+
+
+
