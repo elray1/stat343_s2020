@@ -255,6 +255,7 @@ make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
 
 #### Wed, Mar 11
  * **In class**, we will work on:
+    * **Midterm 1**
  * **After class**, please:
 
 
