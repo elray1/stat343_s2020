@@ -195,7 +195,7 @@ make_week_box("week5", FALSE, "Week 5: Feb 17 -- Feb 21", "
     * Start on analysis of normal distribution from a Bayesian perspective.
         * Lecture notes: [pdf](materials/20200221_more_bayes_practice/bayes_normal_notes.pdf).  Note that for case 1 (unknown mean, known variance) I mixed up the notation a little towards the end of page 1 of these notes.  The stuff I wrote in class was correct.
         * Plots illustrating MSE for Bayesian estimator of the mean when the variance is known: [pdf](materials/20200221_more_bayes_practice/20200221_normal_univar_bayes.pdf)
-    * Another practice example we didn't have time for: [pdf](materials/20200221_more_bayes_practice/20200221_more_bayes_practice.pdf)
+    * Another practice example we didn't have time for: [pdf](materials/20200221_more_bayes_practice/20200221_more_bayes_practice.pdf).  Solutions: [pdf](materials/20200221_more_bayes_practice/20200221_more_bayes_practice_solutions.pdf)
  * **After class**, please:
     * **Homework 3** due Wed. Feb 26
 ")
@@ -216,14 +216,13 @@ make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 #### Wed, Feb 26
  * **In class**, we will work on:
     * Finish examples from last class
-    * Introduce MCMC
  * **After class**, please:
-    * **Homework 3** due **today**, Wed. Feb 26
+    * **Homework 3** due **Thursday Feb. 27**
 
 
 #### Fri, Feb 28
  * **In class**, we will work on:
-    * Lab on MCMC
+    * Introduce MCMC
  * **After class**, please:
 ")
 ```
