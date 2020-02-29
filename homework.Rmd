@@ -51,4 +51,15 @@ title: "Homework"
 |              | R part:                                       |           |       |                                                    |
 |              | Distributed via GitHub.                       |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
-
+|    4         | Monte Carlo integration.                      | 5 pm,     |  1    |                                                    |
+|              |                                               | 3/6/2020  |       |                                                    |
+|              | Note: for this assignment, do the written     |           |       |                                                    |
+|              | part before the R part.                       |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps4/ps4_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps4/ps4_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part:                                       |           |       |                                                    |
+|              | Distributed via GitHub.                       |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+

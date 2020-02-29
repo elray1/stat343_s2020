@@ -1,0 +1,274 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Problem Set 4: Written Part},
+            pdfauthor={Your Name Goes Here},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Problem Set 4: Written Part}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Your Name Goes Here}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+
+\begin{document}
+\maketitle
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+\hypertarget{details}{%
+\section{Details}\label{details}}
+
+\hypertarget{how-to-write-up}{%
+\subsubsection{How to Write Up}\label{how-to-write-up}}
+
+The written part of this assignment can be either typeset using latex or
+hand written.
+
+\hypertarget{grading}{%
+\subsubsection{Grading}\label{grading}}
+
+5\% of your grade on this assignment is for turning in something
+legible. This means it should be organized, and any Rmd files should
+knit to pdf without issue.
+
+An additional 15\% of your grade is for completion. A quick pass will be
+made to ensure that you've made a reasonable attempt at all problems.
+
+Across both the written part and the R part, in the range of 1 to 3
+problems will be graded more carefully for correctness. In grading these
+problems, an emphasis will be placed on full explanations of your
+thought process. You don't need to write more than a few sentences for
+any given problem, but you should write complete sentences!
+Understanding and explaining the reasons behind what you are doing is at
+least as important as solving the problems correctly.
+
+Solutions to all problems will be provided.
+
+\hypertarget{collaboration}{%
+\subsubsection{Collaboration}\label{collaboration}}
+
+You are allowed to work with others on this assignment, but you must
+complete and submit your own write up. You should not copy large blocks
+of code or written text from another student.
+
+\hypertarget{sources}{%
+\subsubsection{Sources}\label{sources}}
+
+You may refer to our text, Wikipedia, and other online sources. All
+sources you refer to must be cited.
+
+\hypertarget{problem-i-cheating}{%
+\section{Problem I: Cheating}\label{problem-i-cheating}}
+
+This problem is adapted from an exercise in ``Introduction to
+Statistical Thought'' by Michael Lavine (2013). Lavine writes:
+
+\begin{quote}
+Some researchers are interested in \(\theta\), the proportion of
+students who ever cheat on exams. They randomly sample 100 students and
+ask ``Have you ever cheated on a college exam?'' Naturally, some
+students lie. Let \(\phi_1\) be the proportion of non-cheaters who lie
+and \(\phi_2\) be the proportion of cheaters who lie. Let \(X\) be the
+number of students who answer ``Yes''.
+\end{quote}
+
+Define the following events:
+
+\begin{itemize}
+\tightlist
+\item
+  \(A\) is the event that a randomly sampled student actually has
+  cheated on a college exam.
+\item
+  \(B\) is the event that a randomly sampled student says they have
+  cheated on a college exam. (They answer ``Yes''.)
+\end{itemize}
+
+\hypertarget{based-on-the-problem-statement-above-write-the-following-probabilities-in-terms-of-the-unknown-parameters-theta-phi_1-and-phi_2.}{%
+\subsubsection{\texorpdfstring{(1) Based on the problem statement above,
+write the following probabilities in terms of the unknown parameters
+\(\theta\), \(\phi_1\), and
+\(\phi_2\).}{(1) Based on the problem statement above, write the following probabilities in terms of the unknown parameters \textbackslash{}theta, \textbackslash{}phi\_1, and \textbackslash{}phi\_2.}}\label{based-on-the-problem-statement-above-write-the-following-probabilities-in-terms-of-the-unknown-parameters-theta-phi_1-and-phi_2.}}
+
+\begin{itemize}
+\item
+  \(P(A)\): the probability that a randomly sampled student has cheated
+  on a college exam
+\item
+  \(P(B | A^c)\): the probability that a randomly sampled student says
+  they have cheated on a college exam, given that they actually have not
+  cheated
+\item
+  \(P(B^c | A^c)\): the probability that a randomly sampled student says
+  they have not cheated on a college exam, given that they actually have
+  not cheated
+\item
+  \(P(B | A)\): the probability that a randomly sampled student says
+  they have cheated on a college exam, given that they actually have
+  cheated
+\item
+  \(P(B^c | A)\): the probability that a randomly sampled student says
+  they have not cheated on a college exam, given that they actually have
+  cheated
+\end{itemize}
+
+\hypertarget{find-pb-the-probability-that-a-randomly-sampled-student-says-they-have-cheated-on-a-college-exam.}{%
+\subsubsection{(2) Find P(B), the probability that a randomly sampled
+student says they have cheated on a college
+exam.}\label{find-pb-the-probability-that-a-randomly-sampled-student-says-they-have-cheated-on-a-college-exam.}}
+
+\hypertarget{specify-a-reasonable-probability-model-for-x-the-number-of-the-100-students-in-the-survey-who-answer-yes.-you-may-assume-that-the-survey-responses-are-independent-for-example-the-respondents-are-not-friends-and-are-not-planning-their-survey-responses-together.-specify-all-parameters-for-your-model-in-terms-of-theta-phi_1-and-phi_2.}{%
+\subsubsection{\texorpdfstring{(3) Specify a reasonable probability
+model for \(X\), the number of the 100 students in the survey who answer
+``Yes''. You may assume that the survey responses are independent; for
+example, the respondents are not friends and are not planning their
+survey responses together. Specify all parameters for your model in
+terms of \(\theta\), \(\phi_1\), and
+\(\phi_2\).}{(3) Specify a reasonable probability model for X, the number of the 100 students in the survey who answer ``Yes''. You may assume that the survey responses are independent; for example, the respondents are not friends and are not planning their survey responses together. Specify all parameters for your model in terms of \textbackslash{}theta, \textbackslash{}phi\_1, and \textbackslash{}phi\_2.}}\label{specify-a-reasonable-probability-model-for-x-the-number-of-the-100-students-in-the-survey-who-answer-yes.-you-may-assume-that-the-survey-responses-are-independent-for-example-the-respondents-are-not-friends-and-are-not-planning-their-survey-responses-together.-specify-all-parameters-for-your-model-in-terms-of-theta-phi_1-and-phi_2.}}
+
+\hypertarget{write-down-a-formula-for-the-pdf-of-x-theta-phi_1-phi_2-based-on-your-model-in-part-3.-note-that-you-will-conduct-the-survey-of-100-students-once-and-record-x-x.-you-observe-a-single-x-not-x_1-ldots-x_100.}{%
+\subsubsection{\texorpdfstring{(4) Write down a formula for the pdf of
+\(X | \Theta, \Phi_1, \Phi_2\) based on your model in part (3). Note
+that you will conduct the survey of 100 students once and record
+\(X = x\). (You observe a single \(x\), not
+\(x_1, \ldots, x_{100}\).)}{(4) Write down a formula for the pdf of X \textbar{} \textbackslash{}Theta, \textbackslash{}Phi\_1, \textbackslash{}Phi\_2 based on your model in part (3). Note that you will conduct the survey of 100 students once and record X = x. (You observe a single x, not x\_1, \textbackslash{}ldots, x\_\{100\}.)}}\label{write-down-a-formula-for-the-pdf-of-x-theta-phi_1-phi_2-based-on-your-model-in-part-3.-note-that-you-will-conduct-the-survey-of-100-students-once-and-record-x-x.-you-observe-a-single-x-not-x_1-ldots-x_100.}}
+
+\hypertarget{suppose-you-have-specified-independent-beta-prior-distributions-for-the-unknown-parameters-theta-phi_1-and-phi_2-theta-sim-textbetaalpha_0-beta_0-phi_1-sim-textbetaalpha_1-beta_1-and-phi_2-sim-textbetaalpha_2-beta_2.-in-this-notation-alpha_0-beta_0-alpha_1-beta_1-alpha_2-and-beta_2-are-numbers-the-analyst-picks-to-specify-the-priors-for-each-of-the-three-parameters-theta-phi_1-and-phi_2.-write-down-formulas-for-the-pdfs-of-these-three-prior-distributions.-you-will-be-writing-down-three-separate-pdfs-involving-theta-phi_1-phi_2-alpha_0-beta_0-alpha_1-beta_1-alpha_2-and-beta_2.}{%
+\subsubsection{\texorpdfstring{(5) Suppose you have specified
+independent Beta prior distributions for the unknown parameters
+\(\theta\), \(\phi_1\), and \(\phi_2\):
+\(\Theta \sim \text{Beta}(\alpha_{0}, \beta_{0})\),
+\(\Phi_1 \sim \text{Beta}(\alpha_{1}, \beta_{1})\), and
+\(\Phi_2 \sim \text{Beta}(\alpha_{2}, \beta_{2})\). In this notation,
+\(\alpha_{0}\), \(\beta_{0}\), \(\alpha_{1}\), \(\beta_{1}\),
+\(\alpha_{2}\), and \(\beta_{2}\) are numbers the analyst picks to
+specify the priors for each of the three parameters \(\theta\),
+\(\phi_1\), and \(\phi_2\). Write down formulas for the pdfs of these
+three prior distributions. You will be writing down three separate pdfs
+involving \(\theta\), \(\phi_1\), \(\phi_2\), \(\alpha_{0}\),
+\(\beta_{0}\), \(\alpha_{1}\), \(\beta_{1}\), \(\alpha_{2}\), and
+\(\beta_{2}\).}{(5) Suppose you have specified independent Beta prior distributions for the unknown parameters \textbackslash{}theta, \textbackslash{}phi\_1, and \textbackslash{}phi\_2: \textbackslash{}Theta \textbackslash{}sim \textbackslash{}text\{Beta\}(\textbackslash{}alpha\_\{0\}, \textbackslash{}beta\_\{0\}), \textbackslash{}Phi\_1 \textbackslash{}sim \textbackslash{}text\{Beta\}(\textbackslash{}alpha\_\{1\}, \textbackslash{}beta\_\{1\}), and \textbackslash{}Phi\_2 \textbackslash{}sim \textbackslash{}text\{Beta\}(\textbackslash{}alpha\_\{2\}, \textbackslash{}beta\_\{2\}). In this notation, \textbackslash{}alpha\_\{0\}, \textbackslash{}beta\_\{0\}, \textbackslash{}alpha\_\{1\}, \textbackslash{}beta\_\{1\}, \textbackslash{}alpha\_\{2\}, and \textbackslash{}beta\_\{2\} are numbers the analyst picks to specify the priors for each of the three parameters \textbackslash{}theta, \textbackslash{}phi\_1, and \textbackslash{}phi\_2. Write down formulas for the pdfs of these three prior distributions. You will be writing down three separate pdfs involving \textbackslash{}theta, \textbackslash{}phi\_1, \textbackslash{}phi\_2, \textbackslash{}alpha\_\{0\}, \textbackslash{}beta\_\{0\}, \textbackslash{}alpha\_\{1\}, \textbackslash{}beta\_\{1\}, \textbackslash{}alpha\_\{2\}, and \textbackslash{}beta\_\{2\}.}}\label{suppose-you-have-specified-independent-beta-prior-distributions-for-the-unknown-parameters-theta-phi_1-and-phi_2-theta-sim-textbetaalpha_0-beta_0-phi_1-sim-textbetaalpha_1-beta_1-and-phi_2-sim-textbetaalpha_2-beta_2.-in-this-notation-alpha_0-beta_0-alpha_1-beta_1-alpha_2-and-beta_2-are-numbers-the-analyst-picks-to-specify-the-priors-for-each-of-the-three-parameters-theta-phi_1-and-phi_2.-write-down-formulas-for-the-pdfs-of-these-three-prior-distributions.-you-will-be-writing-down-three-separate-pdfs-involving-theta-phi_1-phi_2-alpha_0-beta_0-alpha_1-beta_1-alpha_2-and-beta_2.}}
+
+\hypertarget{suppose-you-now-observe-x-x.-write-down-a-formula-for-the-pdf-of-the-joint-posterior-of-theta-phi_1-and-phi_2-given-x-x-up-to-a-multiplicative-constant-of-proportionality.}{%
+\subsubsection{\texorpdfstring{(6) Suppose you now observe \(X = x\).
+Write down a formula for the pdf of the joint posterior of \(\Theta\),
+\(\Phi_1\), and \(\Phi_2\) given \(X = x\), up to a multiplicative
+constant of
+proportionality.}{(6) Suppose you now observe X = x. Write down a formula for the pdf of the joint posterior of \textbackslash{}Theta, \textbackslash{}Phi\_1, and \textbackslash{}Phi\_2 given X = x, up to a multiplicative constant of proportionality.}}\label{suppose-you-now-observe-x-x.-write-down-a-formula-for-the-pdf-of-the-joint-posterior-of-theta-phi_1-and-phi_2-given-x-x-up-to-a-multiplicative-constant-of-proportionality.}}
+
+\hypertarget{your-real-goal-is-to-use-the-survey-data-to-learn-about-theta-the-proportion-of-students-who-have-cheated.-phi_1-and-phi_2-are-not-of-direct-interest-they-were-just-necessary-to-get-a-reasonable-model-for-the-data.-parameters-like-this-are-sometimed-referred-to-as-nuisance-parameters.}{%
+\subsubsection{\texorpdfstring{(7) Your real goal is to use the survey
+data to learn about \(\theta\), the proportion of students who have
+cheated. \(\phi_1\) and \(\phi_2\) are not of direct interest, they were
+just necessary to get a reasonable model for the data. (Parameters like
+this are sometimed referred to as ``nuisance
+parameters''.)}{(7) Your real goal is to use the survey data to learn about \textbackslash{}theta, the proportion of students who have cheated. \textbackslash{}phi\_1 and \textbackslash{}phi\_2 are not of direct interest, they were just necessary to get a reasonable model for the data. (Parameters like this are sometimed referred to as ``nuisance parameters''.)}}\label{your-real-goal-is-to-use-the-survey-data-to-learn-about-theta-the-proportion-of-students-who-have-cheated.-phi_1-and-phi_2-are-not-of-direct-interest-they-were-just-necessary-to-get-a-reasonable-model-for-the-data.-parameters-like-this-are-sometimed-referred-to-as-nuisance-parameters.}}
+
+\hypertarget{a.-suppose-you-want-to-calculate-the-posterior-mean-for-the-proportion-of-students-who-have-cheated.-write-this-as-a-suitable-integral-of-the-joint-posterior-pdf-f_theta-phi_1-phi_2-xtheta-phi_1-phi_2-x.}{%
+\paragraph{\texorpdfstring{a. Suppose you want to calculate the
+posterior mean for the proportion of students who have cheated. Write
+this as a suitable integral of the joint posterior pdf
+\(f_{\Theta, \Phi_1, \Phi_2 | X}(\theta, \phi_1, \phi_2 | x)\).}{a. Suppose you want to calculate the posterior mean for the proportion of students who have cheated. Write this as a suitable integral of the joint posterior pdf f\_\{\textbackslash{}Theta, \textbackslash{}Phi\_1, \textbackslash{}Phi\_2 \textbar{} X\}(\textbackslash{}theta, \textbackslash{}phi\_1, \textbackslash{}phi\_2 \textbar{} x).}}\label{a.-suppose-you-want-to-calculate-the-posterior-mean-for-the-proportion-of-students-who-have-cheated.-write-this-as-a-suitable-integral-of-the-joint-posterior-pdf-f_theta-phi_1-phi_2-xtheta-phi_1-phi_2-x.}}
+
+Hint: How can you find \(f_{\Theta | X}(\theta | x)\) from
+\(f_{\Theta, \Phi_1, \Phi_2 | X}(\theta, \phi_1, \phi_2 | x)\)?
+
+\hypertarget{b.-suppose-you-have-a-sample-theta_1-phi_1_1-phi_2_1-ldots-theta_m-phi_1_m-phi_2_m-from-the-joint-posterior-distribution-of-theta-phi_1-and-phi_2-given-x.-write-how-you-could-approximate-the-integral-from-part-a-using-monte-carlo-integration.}{%
+\paragraph{\texorpdfstring{b. Suppose you have a sample
+\((\theta_1, {\phi_1}_1, {\phi_2}_1), \ldots, (\theta_m, {\phi_1}_m, {\phi_2}_m)\)
+from the joint posterior distribution of \(\Theta\), \(\Phi_1\), and
+\(\Phi_2\) given \(X\). Write how you could approximate the integral
+from part a using Monte Carlo
+integration.}{b. Suppose you have a sample (\textbackslash{}theta\_1, \{\textbackslash{}phi\_1\}\_1, \{\textbackslash{}phi\_2\}\_1), \textbackslash{}ldots, (\textbackslash{}theta\_m, \{\textbackslash{}phi\_1\}\_m, \{\textbackslash{}phi\_2\}\_m) from the joint posterior distribution of \textbackslash{}Theta, \textbackslash{}Phi\_1, and \textbackslash{}Phi\_2 given X. Write how you could approximate the integral from part a using Monte Carlo integration.}}\label{b.-suppose-you-have-a-sample-theta_1-phi_1_1-phi_2_1-ldots-theta_m-phi_1_m-phi_2_m-from-the-joint-posterior-distribution-of-theta-phi_1-and-phi_2-given-x.-write-how-you-could-approximate-the-integral-from-part-a-using-monte-carlo-integration.}}
+
+\hypertarget{c.-suppose-you-want-to-calculate-the-posterior-probability-that-less-than-half-of-students-have-cheated.-write-this-as-a-suitable-integral-of-the-joint-posterior-pdf-f_theta-phi_1-phi_2-xtheta-phi_1-phi_2-x.-set-it-up-so-you-have-an-indicator-function-as-part-of-the-integrand-on-the-inside-of-the-integral.}{%
+\paragraph{\texorpdfstring{c. Suppose you want to calculate the
+posterior probability that less than half of students have cheated.
+Write this as a suitable integral of the joint posterior pdf
+\(f_{\Theta, \Phi_1, \Phi_2 | X}(\theta, \phi_1, \phi_2 | x)\). Set it
+up so you have an indicator function as part of the integrand (on the
+inside of the
+integral).}{c. Suppose you want to calculate the posterior probability that less than half of students have cheated. Write this as a suitable integral of the joint posterior pdf f\_\{\textbackslash{}Theta, \textbackslash{}Phi\_1, \textbackslash{}Phi\_2 \textbar{} X\}(\textbackslash{}theta, \textbackslash{}phi\_1, \textbackslash{}phi\_2 \textbar{} x). Set it up so you have an indicator function as part of the integrand (on the inside of the integral).}}\label{c.-suppose-you-want-to-calculate-the-posterior-probability-that-less-than-half-of-students-have-cheated.-write-this-as-a-suitable-integral-of-the-joint-posterior-pdf-f_theta-phi_1-phi_2-xtheta-phi_1-phi_2-x.-set-it-up-so-you-have-an-indicator-function-as-part-of-the-integrand-on-the-inside-of-the-integral.}}
+
+\hypertarget{d.-write-how-you-could-approximate-the-integral-from-part-c-using-monte-carlo-integration.}{%
+\paragraph{d. Write how you could approximate the integral from part c
+using Monte Carlo
+integration.}\label{d.-write-how-you-could-approximate-the-integral-from-part-c-using-monte-carlo-integration.}}
+
+
+\end{document}
