@@ -1,0 +1,157 @@
+---
+title: "MCMC for Bayesian Inference"
+output:
+  pdf_document:
+    keep_tex: yes
+header-includes:
+  - \usepackage{multicol}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+## Goal
+
+ * Use Stan to generate samples from the posterior distribution of a parameter $\theta$ (or possibly a vector of parameters) given the observed data.
+
+### Example: Cosmological Microwave Background (CMB)
+
+This example is taken from Marin and Robert (2007).  Here's a quote from them describing the figure below, also from them:
+
+> 'Figure 2.2 is an image (in the spectral domain) of the "cosmological microwave background" (CMB) in a region of the sky: More specifically, this picture represents the electromagnetic radiation from photons dating back to the early ages of the universe, a radiation often called "fossil light," that dates back to a few hundred thousand years after the Big Bang (Chown, 1996). The grey levels are given by the differences in apparent temperature from the mean temperature and as stored in `cmb`.
+
+> For astrophysical (or rather cosmological) reasons too involved to be detailed here, the repartition of the sectrum is quite isotropic (that is, independent of direction) and normal.  In fact, if we treat each temperature difference in Figure 2.2 as an independent realization, the histogram of these differences ... provides a rather accurate representation of the distribution of these temperatures...'
+
+\includegraphics[height = 4in]{CMBdata_bayesian_core.png}
+
+The code below reads in the data and makes an initial plot:
+
+```{r, message=FALSE, warning=FALSE, fig.height = 3}
+library(tidyverse)
+
+cmb <- read_csv("http://www.evanlray.com/data/bayesian_core/CMBdata.txt",
+    col_names = FALSE)
+names(cmb) <- "temp_difference"
+
+ggplot(data = cmb, mapping = aes(x = temp_difference)) +
+  geom_histogram(center = 0.005, binwidth = 0.01, mapping = aes(y = ..density..))
+```
+
+
+#### Model
+
+We'll try a normal model.  Let $X_1, \ldots, X_n$ denote the $n = 640000$ temperature differences.  We model these as independent, with each
+
+$X_i \sim \text{Normal}(\mu, \sigma^2)$
+
+This model has two parameters: $\mu$ and $\sigma^2$.  We will use the following prior distributions for these parameters:
+
+A Normal$(0, 1000)$ prior for $\mu$.  This is a very high variance, so is not informative.
+
+A Gamma$(2, 1)$ prior for $\sigma^2$:
+
+$f(\sigma^2 | \alpha = 2, \beta = 1) = \frac{\beta^\alpha}{\Gamma(\alpha)}(\sigma^2)^{\alpha - 1}e^{-\beta x}$
+
+## Fit via Stan
+
+### normal.stan
+
+Here is the content of the file normal.stan:
+
+```{r, eval = FALSE}
+data {
+  int<lower=0> n; // number of observations
+  real x[n]; // data: an array of length n where each entry is a real number
+}
+
+parameters {
+  real mu;
+  real<lower=0> sigma;
+}
+
+model {
+  mu ~ normal(0, 1000); // prior for mu: normal with a very large variance; non-informative
+  sigma ~ gamma(2, 1); // prior for sigma: gamma with shape = 1 and rate = 0.01; non-informative
+  x ~ normal(mu, sigma); // data model: each element of x follows a normal(mu, sigma) distribution
+}
+```
+
+The `data` block in the Stan file describes fixed, known quantities that will be passed in to Stan.  In this case, we have said that we will tell Stan what our sample size is (`n`) and give it a vector of length `n` with observed data values `x`.
+
+The `parameters` block defines parameters to estimate; in this case, the mean `mu` and standard deviation `sigma` of the normal distribution.
+
+The `model` block defines our prior distributions and data model.
+
+Stan takes these ingredients and creates a program in C++ that will perform Bayesian estimation for this model using a MCMC approach called Hamiltonian Monte Carlo.
+
+### R code to interface with Stan
+
+#### Call Stan to do the estimation
+
+ * For MCMC, just one command (`stan`) both compiles the model and performs the sampling.
+ * A substantial part of the run time when calling Stan comes from creating and compiling the C++ program to do estimation.  The command `rstan_options(auto_write = TRUE)` ensures that this is done only the first time you call Stan, unless you've made changes to the stan file.
+ * The `stan` function does estimation.  Here we have used 4 arguments:
+    * `file`: the stan file with the model definition, created above.
+    * `data`: a named list with one entry for each variable declared in the `data` block of the stan file.
+    * `iter`: how many iterations to perform (how many samples to draw from the posterior in each MCMC chain).
+    * `chains`: how many MCMC chains to run; here, 4 separate chains are run.
+
+```{r, message = FALSE}
+library(rstan)
+```
+
+```{r fit_stan, cache = FALSE}
+rstan_options(auto_write = TRUE)
+
+fit <- stan(
+  file = "normal.stan",
+  data = list(n = nrow(cmb), x = cmb$temp_difference),
+  iter = 1000,
+  chains = 4)
+```
+
+#### View the results
+
+The `rstan` package comes with some pretty useful default functions to display and summarize the samples from the posterior distribution:
+
+```{r}
+print(fit)
+```
+
+What's the deal with effective sample sizes?
+
+\vspace{4cm}
+
+We can also extract the parameter samples and compute summaries like posterior means and credible intervals by hand.  Calling `as.data.frame` on our model fit object returns a data frame with the samples for each parameter defined in the stan model file.
+
+```{r}
+param_samples <- as.data.frame(fit)
+head(param_samples)
+```
+
+```{r, eval = TRUE}
+dim(param_samples)
+
+param_samples %>%
+  summarize(
+    mu_mean = mean(mu),
+    mu_ci_lower = quantile(mu, probs = 0.025),
+    mu_ci_upper = quantile(mu, probs = 0.975),
+    sigma_mean = mean(sigma),
+    sigma_ci_lower = quantile(sigma, probs = 0.025),
+    sigma_ci_upper = quantile(sigma, probs = 0.975)
+  )
+```
+
+```{r, eval = TRUE}
+ggplot(data = param_samples, mapping = aes(x = mu)) +
+  geom_density()
+```
+

@@ -1,0 +1,32 @@
+---
+title: "Stat 343 More Practice with Monte Carlo Integration"
+output:
+  pdf_document:
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+For all of the problems below, first write your answer as a suitable integral, then write a 2-step algorithm to approximate the integral.
+
+#### 1. Suppose $X \sim \text{Normal}(5, 2^2)$.  You have a function that can generate a sample $x_{1}, \ldots, x_{m}$ from this normal distribution.  How could you use Monte Carlo integration to approximate $E(X^2)$?
+
+\vspace{8cm}
+
+#### 2. Suppose you did the M&M's experiment and your posterior distribution is $\Theta | X_1, \ldots, X_n \sim \text{Beta}(12, 136)$.  You have a function that can generate a sample $\theta_{1}, \ldots, \theta_{m}$ from this beta distribution.  How could you use Monte Carlo integration to approximate the posterior probability that $\Theta$ is between 0.1 and 0.2?
+
+\vspace{8cm}
+
+#### 3. Suppose you have a normal model: $X_1, \ldots, X_n | \Theta, \Xi \simiid \text{Normal}(\theta, \xi^{-1})$.  Neither $\theta$ nor $\xi$ are known, so you put a prior distribution on them.  As we have seen, there is no conjugate prior for both $\theta$ and $\xi$ in this model, so you don't know an exact parametric distribution for the joint posterior of $\Theta$ and $\Xi$.  However, you have a function that can generate a sample $(\theta_1, \xi_1), \ldots, (\theta_m, \xi_m)$ from the joint posterior of $\Theta, \Xi | X_1, \ldots, X_n$.  How could you use Monte Carlo integration to approximate the posterior probability that $\Theta$ is between 1 and 2?
+
+\vspace{8cm}
+
+#### 4. What theorem justifies all of the above?  What do your answers to problems 2 and 3 have to do with an expected value?
+

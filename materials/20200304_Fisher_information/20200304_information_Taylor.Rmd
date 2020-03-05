@@ -1,0 +1,133 @@
+---
+title: "Motivation for Fisher Information, Continued"
+output: pdf_document
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Seedlings (Poisson Model)
+
+Ecologists divided a region of the forest floor into $n$ quadrats and counted the number of seedlings that sprouted in each quadrat as part of a study on climate change.
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * We have seen that the maximum likelihood estimate is $\hat{\lambda}^{MLE} = \frac{1}{n}\sum_{i=1}^n X_i$
+
+### Connection between Observed Fisher Information and Taylor series approximation to log-likelihood
+
+ * Second order Taylor approximation to the log-likelihood at the point $\lambda^*$:
+
+\begin{align*}
+\ell(\lambda | x_1, \ldots, x_n) &\approx \ell(\lambda^* | x_1, \ldots, x_n) + \frac{d}{d \lambda} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^*} (\lambda - \lambda^*) + \frac{1}{2} \frac{d^2}{d \lambda^2} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^*} (\lambda - \lambda^*)^2 \\
+&= \ell(\lambda^* | x_1, \ldots, x_n) + \frac{d}{d \lambda} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^*} (\lambda - \lambda^*) - \frac{1}{2} \left\{- \frac{d^2}{d \lambda^2} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^*} \right\} (\lambda - \lambda^*)^2 \\
+&= \ell(\lambda^* | x_1, \ldots, x_n) + \frac{d}{d \lambda} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^*} (\lambda - \lambda^*) - \frac{1}{2} \left\{ J(\lambda^*) \right\} (\lambda - \lambda^*)^2 \\
+\end{align*}
+
+### If we approximate at the maximum likelihood estimate then the second term goes away:
+
+ * At the MLE, the derivative of the log-likelihood is 0: $\frac{d}{d \lambda} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^{MLE}} = 0$
+
+\begin{align*}
+\ell(\lambda | x_1, \ldots, x_n) &\approx \ell(\lambda^{MLE} | x_1, \ldots, x_n) + \frac{d}{d \lambda} \ell(\lambda | x_1, \ldots, x_n) \vert_{\lambda = \lambda^{MLE}} (\lambda - \lambda^{MLE}) - \frac{1}{2} J(\lambda^{MLE}) (\lambda - \lambda^{MLE})^2 \\
+&\approx \ell(\lambda^{MLE} | x_1, \ldots, x_n) + 0 (\lambda - \lambda^{MLE}) - \frac{1}{2} J(\lambda^{MLE}) (\lambda - \lambda^{MLE})^2 \\
+&\approx \ell(\lambda^{MLE} | x_1, \ldots, x_n) - \frac{1}{2} J(\lambda^{MLE}) (\lambda - \lambda^{MLE})^2
+\end{align*}
+
+\newpage
+
+### Results from 2 different samples
+
+ * For both subsets I have chosen, $\hat{\lambda}^{MLE}$ is the same:
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+
+subset_1_inds <- 1:56
+subset_2_inds <- c(1:3, 54)
+```
+
+```{r}
+mean(seedlings$new_1993[subset_1_inds])
+mean(seedlings$new_1993[subset_2_inds])
+```
+
+ * The number of observations is different:
+    * the first has $n = 56$ observations
+    * the second has $n = 4$ observations
+ * The observed Fisher information is therefore different:
+    * the first has observed Fisher information $J(\theta^*) = \frac{n}{\bar{x}} = \frac{56}{0.75} = 74.667$
+    * the second has observed Fisher information $J(\theta^*) = \frac{n}{\bar{x}} = \frac{4}{0.75} = 5.333$
+ * Taylor series approximations about the maximum likelihood estimate $\hat{\lambda}^{MLE}$:
+    * $\ell(\lambda | x_1, \ldots, x_n) \approx \ell(0.75 | x_1, \ldots, x_{56}) - \frac{1}{2} 74.667 (\lambda - 0.75)^2$
+    * $\ell(\lambda | x_1, \ldots, x_n) \approx \ell(0.75 | x_1, \ldots, x_{4}) - \frac{1}{2} 5.333 (\lambda - 0.75)^2$
+ * Curvature of log-likelihood is greater with the sample size of 56 than with the sample size of 4.
+ * Here are the likelihood and log-likelihood functions based on the two different subsets, with orange lines at the MLE:
+
+```{r, fig.height=5, fig.width = 8, echo = FALSE, warning = FALSE}
+calc_loglik <- function(lambda, observed_counts) {
+  result <- vector("numeric", length(lambda))
+  for(i in seq_along(lambda)) {
+    result[i] <- sum(dpois(observed_counts, lambda = lambda[i], log = TRUE))
+  }
+  
+  return(result)
+}
+
+lambda_grid <- seq(from = 0.01, to = 4.0, length = 1000)
+
+max_loglik_n56 = calc_loglik(0.75, seedlings$new_1993[subset_1_inds])
+max_loglik_n4 = calc_loglik(0.75, seedlings$new_1993[subset_2_inds])
+
+to_plot <- bind_rows(
+  data.frame(
+    lambda = lambda_grid,
+    log_likelihood = calc_loglik(lambda_grid, seedlings$new_1993[subset_1_inds]),
+    taylor_approx = max_loglik_n56 - 0.5 * 74.667 * (lambda_grid - 0.75)^2,
+    subset = "n = 56"
+  ),
+  data.frame(
+    lambda = lambda_grid,
+    log_likelihood = calc_loglik(lambda_grid, seedlings$new_1993[subset_2_inds]),
+    taylor_approx = max_loglik_n4 - 0.5 * 5.333 * (lambda_grid - 0.75)^2,
+    subset = "n = 4"
+  )
+) %>%
+  mutate(
+    likelihood = exp(log_likelihood)
+  )
+
+ggplot(data = to_plot %>%
+         select(subset, lambda, log_likelihood, taylor_approx) %>%
+         pivot_longer(cols = c("log_likelihood", "taylor_approx"), names_to = "Function") %>%
+         mutate(
+           Function = case_when(
+             Function == "log_likelihood" ~ "log likelihood",
+             Function == "taylor_approx" ~ "Taylor approximation"
+          )
+         ),
+    mapping = aes(x = lambda, y = value, color = Function)) +
+  geom_line() +
+  geom_vline(xintercept = 0.75, color = "orange") +
+  scale_color_manual(values = c("black", "cornflowerblue")) +
+  facet_wrap( ~ subset) +
+  theme_bw() +
+  ggtitle("Log-likelihood Functions and Taylor Approximations")
+```

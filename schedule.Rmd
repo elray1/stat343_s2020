@@ -222,7 +222,9 @@ make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 
 #### Fri, Feb 28
  * **In class**, we will work on:
+    * Some additional Monte Carlo integration examples: [pdf](materials/20200226_mcmc/20200226_more_mc_integration_examples.pdf)
     * Introduce MCMC
+        * [pdf](materials/20200226_mcmc/20200226_bayes_MCMC_Metropolis.pdf)
  * **After class**, please:
 ")
 ```
@@ -231,16 +233,28 @@ make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
 #### Mon, Mar 02
  * **In class**, we will work on:
+     * Finish MCMC (correction to last pages of handout from last class) and lab on MCMC:
+         * [pdf](materials/20200302_mcmc_stan_fix/20200032_bayes_stan.pdf)
+     * Quiz 3
  * **After class**, please:
 
 
 #### Wed, Mar 04
  * **In class**, we will work on:
+    * Overview of next week or two: [pdf](materials/20200304_Fisher_information/notes_upcoming.pdf)
+    * Fisher information
+        * Motivation: [pdf](materials/20200304_Fisher_information/20200304_large_sample_information.pdf)
+        * Lecture notes: [pdf](materials/20200304_Fisher_information/notes_fisher.pdf)
+        * Connection to Taylor series: [pdf](materials/20200304_Fisher_information/20200304_information_Taylor.pdf)
  * **After class**, please:
-
+    * If you want reading for the material we'll cover in the next few days, you can refer to the following sources (in order of how useful I think they are):
+        * https://ocw.mit.edu/courses/mathematics/18-443-statistics-for-applications-fall-2006/lecture-notes/lecture3.pdf
+        * Rice Section 8.5.2
+        * http://www.stat.cmu.edu/~larry/=stat705/Lecture9.pdf
 
 #### Fri, Mar 06
  * **In class**, we will work on:
+    * Large-sample approximation to sampling distribution of MLE
  * **After class**, please:
 ")
 ```
@@ -249,6 +263,7 @@ make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
 make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
 #### Mon, Mar 09
  * **In class**, we will work on:
+     * Large-sample normal approximation to sampling distribution of MLE, consistency of MLE
  * **After class**, please:
 
 
@@ -260,6 +275,7 @@ make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
 
 #### Fri, Mar 13
  * **In class**, we will work on:
+    * Large-sample normal approximation to posterior distribution
  * **After class**, please:
 ")
 ```
