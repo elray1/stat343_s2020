@@ -1,0 +1,192 @@
+---
+title: "Large-Sample Normal Approximation to the Posterior"
+subtitle: "First Observaton: for large n, the prior doesn't matter"
+output:
+  pdf_document:
+    keep_tex: yes
+header-includes:
+  - \usepackage{multicol}
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(gridExtra)
+```
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Poisson Model
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * Suppose we use a Gamma prior for $\Lambda$
+    * Example: $\Lambda \sim \text{Gamma}(1, 0.01)$ is fairly non-informative
+ * Think of the posterior pdf in terms of contributions from the prior and the likelihood
+
+
+\newpage
+
+## Simulation: Suppose $\lambda = 10$
+
+#### n = 1
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+plot_xmax <- 50
+
+n <- 1
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 6}
+prior_shape <- 1
+prior_rate <- 1 # 0.01
+
+calc_ind_lik <- function(lambda, x, log = TRUE) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  
+  if(log) {
+    return(result)
+  } else {
+    return(exp(result))
+  }
+}
+
+calc_post_plus_lik <- function(lambda, x, log = TRUE) {
+  temp <- dgamma(lambda, shape = prior_shape, rate = prior_rate, log = TRUE) +
+    calc_ind_lik(lambda, x)
+  
+  if(log) {
+    return(temp)
+  } else {
+    return(exp(temp))
+  }
+}
+
+
+plot_df <- data.frame(
+  lambda = seq(from = 0, to = plot_xmax, length = 1001)
+) %>%
+  mutate(
+    Prior = dgamma(lambda, shape = prior_shape, rate = prior_rate, log = FALSE),
+    Likelihood = calc_ind_lik(lambda, x = x_sim$x, log = FALSE),
+    Posterior = dgamma(lambda, shape = prior_shape + sum(x_sim$x), rate = prior_rate + n, log = FALSE),
+    log_Prior = dgamma(lambda, shape = prior_shape, rate = prior_rate, log = TRUE),
+    log_Likelihood = calc_ind_lik(lambda, x = x_sim$x, log = TRUE),
+    log_Posterior = dgamma(lambda, shape = prior_shape + sum(x_sim$x), rate = prior_rate + n, log = TRUE)
+  ) %>%
+  tidyr::pivot_longer(
+    cols = c("Prior", "Likelihood", "Posterior", "log_Prior", "log_Likelihood", "log_Posterior"),
+    names_to = "Curve",
+    values_to = "value"
+  ) %>%
+  mutate(
+    Curve = factor(Curve, levels = c("Prior", "Likelihood", "Posterior", "log_Prior", "log_Likelihood", "log_Posterior"))
+  )
+
+p1 <- ggplot(data = plot_df %>% filter(Curve %in% c("Prior", "Likelihood", "Posterior"))) +
+  geom_line(mapping = aes(x = lambda, y = value, color = Curve, linetype = Curve)) +
+  scale_color_viridis_d("Curve", begin = 0.2, end = 0.7, option = "D") +
+  scale_linetype_discrete("Curve") +
+  theme_bw() +
+  facet_wrap( ~ Curve, nrow = 1, scales = "free_y") +
+  ggtitle("Prior, Likelihood, and Posterior - Different Vertical Scales")
+
+p2 <- ggplot(data = plot_df %>% filter(Curve %in% c("log_Prior", "log_Likelihood", "log_Posterior"))) +
+  geom_line(mapping = aes(x = lambda, y = value, color = Curve, linetype = Curve)) +
+  scale_color_viridis_d("Curve", begin = 0.2, end = 0.7, option = "D") +
+  scale_linetype_discrete("Curve") +
+  theme_bw() +
+  ggtitle("Log Prior, Log Likelihood, and Log Posterior - Same Vertical Scale")
+
+grid.arrange(p1, p2, ncol = 1)
+```
+
+\newpage
+
+#### n = 100
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+set.seed(93365)
+
+plot_xmax <- 50
+
+n <- 100
+x_sim <- data.frame(x = rpois(n = n, lambda = 10))
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE, fig.height = 6}
+prior_shape <- 1
+prior_rate <- 1 # 0.01
+
+calc_ind_lik <- function(lambda, x, log = TRUE) {
+  result <- seq_along(lambda)
+  for(j in seq_along(lambda)) {
+    result[j] <- sum(dpois(x = x, lambda = lambda[j], log = TRUE))
+  }
+  
+  if(log) {
+    return(result)
+  } else {
+    return(exp(result))
+  }
+}
+
+calc_post_plus_lik <- function(lambda, x, log = TRUE) {
+  temp <- dgamma(lambda, shape = prior_shape, rate = prior_rate, log = TRUE) +
+    calc_ind_lik(lambda, x)
+  
+  if(log) {
+    return(temp)
+  } else {
+    return(exp(temp))
+  }
+}
+
+
+plot_df <- data.frame(
+  lambda = seq(from = 0, to = plot_xmax, length = 1001)
+) %>%
+  mutate(
+    Prior = dgamma(lambda, shape = prior_shape, rate = prior_rate, log = FALSE),
+    Likelihood = calc_ind_lik(lambda, x = x_sim$x, log = FALSE),
+    Posterior = dgamma(lambda, shape = prior_shape + sum(x_sim$x), rate = prior_rate + n, log = FALSE),
+    log_Prior = dgamma(lambda, shape = prior_shape, rate = prior_rate, log = TRUE),
+    log_Likelihood = calc_ind_lik(lambda, x = x_sim$x, log = TRUE),
+    log_Posterior = dgamma(lambda, shape = prior_shape + sum(x_sim$x), rate = prior_rate + n, log = TRUE)
+  ) %>%
+  tidyr::pivot_longer(
+    cols = c("Prior", "Likelihood", "Posterior", "log_Prior", "log_Likelihood", "log_Posterior"),
+    names_to = "Curve",
+    values_to = "value"
+  ) %>%
+  mutate(
+    Curve = factor(Curve, levels = c("Prior", "Likelihood", "Posterior", "log_Prior", "log_Likelihood", "log_Posterior"))
+  )
+
+p1 <- ggplot(data = plot_df %>% filter(Curve %in% c("Prior", "Likelihood", "Posterior"))) +
+  geom_line(mapping = aes(x = lambda, y = value, color = Curve, linetype = Curve)) +
+  scale_color_viridis_d("Curve", begin = 0.2, end = 0.7, option = "D") +
+  scale_linetype_discrete("Curve") +
+  theme_bw() +
+  facet_wrap( ~ Curve, nrow = 1, scales = "free_y") +
+  ggtitle("Prior, Likelihood, and Posterior - Different Vertical Scales")
+
+p2 <- ggplot(data = plot_df %>% filter(Curve %in% c("log_Prior", "log_Likelihood", "log_Posterior"))) +
+  geom_line(mapping = aes(x = lambda, y = value, color = Curve, linetype = Curve)) +
+  scale_color_viridis_d("Curve", begin = 0.2, end = 0.7, option = "D") +
+  scale_linetype_discrete("Curve") +
+  theme_bw() +
+  ggtitle("Log Prior, Log Likelihood, and Log Posterior - Same Vertical Scale")
+
+grid.arrange(p1, p2, ncol = 1)
+```

@@ -314,9 +314,25 @@ make_week_box("week10", TRUE, "Week 10: Mar 23 -- Mar 27", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", "
+make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", '
 #### Mon, Mar 30
  * **In class**, we will work on:
+    * Reminder/overview of recent topics:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/qVKYEUITtPg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200330_Bayes_large_sample/notes.pdf)
+        * Errors:
+            * At about 16:50 in the video, I should have written $\\hat{\\Theta}^{MLE}$
+    * Statement of Theorem: Normal approximation to posterior distribution for large $n$.
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/wvWcNwnZW4M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200330_Bayes_large_sample/20200330_normal_approx_posterior_notes.pdf)
+        * Errors:
+            * At about minute 4:00 in the video, I incorrectly state that the marginal posterior distribution for the mean in a Bayesian analysis of a normal distribution with unknown variance is normal.
+    * Proof Part 1: Prior doesn\'t matter:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/0I62_rpvy0s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200330_Bayes_large_sample/20200330_log_posterior_contributions_notes.pdf)
+    * Proof Part 2: 2nd order Taylor approximation:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/yagz_0HAMvc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200330_Bayes_large_sample/Proof.pdf)
  * **After class**, please:
 
 
@@ -328,7 +344,7 @@ make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", "
 #### Fri, Apr 03
  * **In class**, we will work on:
  * **After class**, please:
-")
+')
 ```
 
 ```{r, echo = FALSE, results='asis'}
