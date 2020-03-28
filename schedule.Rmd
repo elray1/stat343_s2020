@@ -202,7 +202,7 @@ make_week_box("week5", FALSE, "Week 5: Feb 17 -- Feb 21", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
+make_week_box("week6", FALSE, "Week 6: Feb 24 -- Feb 28", "
 #### Mon, Feb 24
  * **In class**, we will work on:
     * Finish examples of estimation for normal distribution from last class.
@@ -230,7 +230,7 @@ make_week_box("week6", TRUE, "Week 6: Feb 24 -- Feb 28", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
+make_week_box("week7", FALSE, "Week 7: Mar 02 -- Mar 06", "
 #### Mon, Mar 02
  * **In class**, we will work on:
      * Finish MCMC (correction to last pages of handout from last class) and lab on MCMC:
@@ -255,6 +255,8 @@ make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
 #### Fri, Mar 06
  * **In class**, we will work on:
     * Large-sample approximation to sampling distribution of MLE
+        * Hand out with proof: [pdf](materials/20200306_normal_approx_mle/20200306_normal_approx_mle_preliminaries.pdf)
+        * Hand out with conditions: [pdf](materials/20200306_normal_approx_mle/graymleconditions.pdf)
  * **After class**, please:
 ")
 ```
@@ -263,25 +265,27 @@ make_week_box("week7", TRUE, "Week 7: Mar 02 -- Mar 06", "
 make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
 #### Mon, Mar 09
  * **In class**, we will work on:
-     * Large-sample normal approximation to sampling distribution of MLE, consistency of MLE
+     * Large-sample normal approximation to sampling distribution of MLE (Continuing handouts from last class)
  * **After class**, please:
 
 
 #### Wed, Mar 11
  * **In class**, we will work on:
-    * **Midterm 1**
+    * Consistency and Efficiency
+        * Notes: [pdf](materials/20200311_consistency_efficiency_lab_mle_sampling/consistency_efficiency_CRLB.pdf)
+        * Set up for lab 10: [pdf](materials/20200311_consistency_efficiency_lab_mle_sampling/20200311_pareto_mle_sampling.pdf)
  * **After class**, please:
 
 
 #### Fri, Mar 13
  * **In class**, we will work on:
-    * Large-sample normal approximation to posterior distribution
+    * No new material.
  * **After class**, please:
 ")
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week9", TRUE, "Week 9: Mar 16 -- Mar 20", "
+make_week_box("week9", FALSE, "Week 9: Mar 16 -- Mar 20", "
 #### Mon, Mar 16
  * **No Class**: Midsemester Break.  Safe travels!
 
@@ -296,20 +300,17 @@ make_week_box("week9", TRUE, "Week 9: Mar 16 -- Mar 20", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week10", TRUE, "Week 10: Mar 23 -- Mar 27", "
+make_week_box("week10", FALSE, "Week 10: Mar 23 -- Mar 27", "
 #### Mon, Mar 23
- * **In class**, we will work on:
- * **After class**, please:
+ * **No Class**: Midsemester Break.  Safe travels!
 
 
 #### Wed, Mar 25
- * **In class**, we will work on:
- * **After class**, please:
+ * **No Class**: Midsemester Break.  Safe travels!
 
 
 #### Fri, Mar 27
- * **In class**, we will work on:
- * **After class**, please:
+ * **No Class**: Midsemester Break.  Safe travels!
 ")
 ```
 

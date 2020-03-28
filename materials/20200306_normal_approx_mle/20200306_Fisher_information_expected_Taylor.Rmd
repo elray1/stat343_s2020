@@ -1,0 +1,181 @@
+---
+title: "Motivation for Fisher Information, Continued Again"
+output: pdf_document
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+# Seedlings (Poisson Model)
+
+Ecologists divided a region of the forest floor into $n$ quadrats and counted the number of seedlings that sprouted in each quadrat as part of a study on climate change.
+
+ * Observe $X_1, \ldots, X_n$; $X_i$ is the number of seedlings in quadrat number $i$.
+ * Data Model: $X_i | \Lambda = \lambda \simiid \text{Poisson}(\lambda)$
+ * We have seen that the maximum likelihood estimate is $\hat{\lambda}^{MLE} = \frac{1}{n}\sum_{i=1}^n X_i$
+
+### Connection between Observed Fisher Information and Taylor series approximation to log-likelihood
+
+ * Consider just the subset with 56 observations.  The MLE is:
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+
+seedlings <- read_table("http://www.evanlray.com/data/lavine_intro_stat_thought/seedlings.txt") %>%
+  select(quadrat = Block,
+    old_1991 = `91`,
+    old_1992 = `92-t`,
+    old_1993 = `93-t`,
+    old_1994 = `94-t`,
+    old_1995 = `95-t`,
+    old_1996 = `96-t`,
+    old_1997 = `97-t`,
+    new_1992 = `92-1`,
+    new_1993 = `93-1`,
+    new_1994 = `94-1`,
+    new_1995 = `95-1`,
+    new_1996 = `96-1`,
+    new_1997 = `97-1`
+  )
+
+subset_inds <- 1:56 #c(1:3, 54)
+```
+
+```{r}
+seedlings$new_1993[subset_inds]
+mean(seedlings$new_1993[subset_inds])
+```
+
+ * There are $n = 56$ observations
+ * The observed Fisher information is $J(\theta^*) = \frac{n}{\bar{x}} = \frac{56}{0.75} = 74.667$.
+    * This is the negative second derivative of the log likelihood function.
+ * The Taylor series approximation about the maximum likelihood estimate $\hat{\lambda}^{MLE}$ is:
+    * $\ell(\lambda | x_1, \ldots, x_n) \approx \ell(0.75 | x_1, \ldots, x_{56}) - \frac{1}{2} 74.667 (\lambda - 0.75)^2$
+ * Here is the log-likelihood function with an orange line at the MLE and the Taylor approximation in blue:
+
+```{r, fig.height=5, fig.width = 8, echo = FALSE, warning = FALSE}
+calc_loglik <- function(lambda, observed_counts) {
+  result <- vector("numeric", length(lambda))
+  for(i in seq_along(lambda)) {
+    result[i] <- sum(dpois(observed_counts, lambda = lambda[i], log = TRUE))
+  }
+  
+  return(result)
+}
+
+lambda_grid <- seq(from = 0.01, to = 4.0, length = 1000)
+
+max_loglik_n56 = calc_loglik(0.75, seedlings$new_1993[subset_inds])
+
+to_plot <- 
+  data.frame(
+    lambda = lambda_grid,
+    log_likelihood = calc_loglik(lambda_grid, seedlings$new_1993[subset_inds]),
+    taylor_approx = max_loglik_n56 - 0.5 * 74.667 * (lambda_grid - 0.75)^2,
+    subset = "n = 56"
+  ) %>%
+  mutate(
+    likelihood = exp(log_likelihood)
+  )
+
+ggplot(data = to_plot %>%
+         select(subset, lambda, log_likelihood, taylor_approx) %>%
+         pivot_longer(cols = c("log_likelihood", "taylor_approx"), names_to = "Function") %>%
+         mutate(
+           Function = case_when(
+             Function == "log_likelihood" ~ "log likelihood",
+             Function == "taylor_approx" ~ "Taylor approximation"
+          )
+         ),
+    mapping = aes(x = lambda, y = value, color = Function)) +
+  geom_line() +
+  geom_vline(xintercept = 0.75, color = "orange") +
+  scale_color_manual(values = c("black", "cornflowerblue")) +
+  facet_wrap( ~ subset) +
+  theme_bw() +
+  ggtitle("Log-likelihood Function and Taylor Approximation")
+```
+
+\newpage
+
+### What if we took other samples?
+
+ * Suppose for the sake of the example that the true parameter value is $\lambda = 0.75$.
+ * Each random sample of size $n = 56$ has:
+    * Different observed values
+    * A different log-likelihood function
+    * A different second derivative of the log-likelihood function at the maximum
+    * A different observed Fisher information
+
+```{r, echo = FALSE}
+lambda_grid <- seq(from = 0.01, to = 2.0, length = 1000)
+
+results_one_sample <- function(i) {
+  n <- 56
+  x <- rpois(n = n, lambda = 0.75)
+  mle <- mean(x)
+  max_loglik_n56 = calc_loglik(mle, x)
+  
+  to_plot <- 
+    data.frame(
+      lambda = lambda_grid,
+      mle = mle,
+      Fisher_information = (n / mean(x)),
+      log_likelihood = calc_loglik(lambda_grid, x),
+      taylor_approx = max_loglik_n56 - 0.5 * (n / mean(x)) * (lambda_grid - mle)^2,
+      subset = paste0("Sample ", i),
+      stringsAsFactors = FALSE
+    ) %>%
+    mutate(
+      likelihood = exp(log_likelihood)
+    )
+  return(to_plot)
+}
+
+to_plot <- purrr::map_dfr(1:12, results_one_sample)
+
+ggplot(data = to_plot %>%
+         select(subset, lambda, log_likelihood, taylor_approx, mle) %>%
+         pivot_longer(cols = c("log_likelihood", "taylor_approx"), names_to = "Function") %>%
+         mutate(
+           Function = case_when(
+             Function == "log_likelihood" ~ "log likelihood",
+             Function == "taylor_approx" ~ "Taylor approximation",
+           ),
+           subset = factor(subset, )
+         ),
+    mapping = aes(x = lambda, y = value, color = Function)) +
+  geom_line() +
+  geom_vline(mapping = aes(xintercept = mle), color = "orange") +
+  scale_color_manual(values = c("black", "cornflowerblue")) +
+  facet_wrap( ~ subset) +
+  theme_bw() +
+  ggtitle("Log-likelihood Function and Taylor Approximation")
+```
+
+Suppose now I simulate 1000 different samples and calculate the observed Fisher information from each:
+
+```{r}
+Fisher_informations <- data.frame(
+  J = rep(NA, 1000)
+)
+
+for(i in 1:1000) {
+  x <- rpois(n = 56, lambda = 0.75)
+  Fisher_informations$J[i] <- 56 / mean(x)
+}
+head(Fisher_informations$J)
+length(Fisher_informations$J)
+```
+
+```{r}
+ggplot(data = Fisher_informations, mapping = aes(x = J)) +
+  geom_density()
+```
+
+The Fisher information is the expected value (average) of the observed Fisher information across different samples:
+
+```{r}
+mean(Fisher_informations$J)
+```
+
