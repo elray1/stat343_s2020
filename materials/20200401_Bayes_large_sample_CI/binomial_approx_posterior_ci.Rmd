@@ -1,0 +1,176 @@
+---
+title: "Large-Sample Normal Approximations to Posterior"
+output:
+  pdf_document
+header-includes:
+   - \usepackage{afterpage}
+---
+
+\newcommand{\simiid}{{\mathrel {\mathop {\sim}\limits _{}^{\rm iid}}\,}}
+\newcommand{\simapprox}{{\mathrel {\mathop {\sim}\limits _{}^{\rm approx.}}\,}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
+```
+
+## Introduction
+
+We previously considered Bayesian inference for the proportion of M&M’s that are blue based on samples of size $n = 1$, $n = 10$, $n = 20$, and $n = 541$.
+
+Our model was $X \sim \text{Binomial}(n, \theta)$
+
+#### Previous analysis:
+
+ * We considered a non-informative conjugate prior of $\Theta \sim \text{Beta}(1, 1)$.
+
+ * In that case, the posterior is $\Theta | X = x \sim \text{Beta}(1 + x, 1 + n - x)$.
+
+ * Based on this posterior, we can find "exact" posterior credible intervals for $\Theta$.
+
+#### Large sample normal approximation to posterior
+
+ * Since we used a conjugate prior, there's actually no reason to do the normal approximation in this example!  This is just for illustration.
+
+ * Since it's a large sample approximation, it doesn't matter what prior we use (as long as it satisfies regularity conditions -- mainly, three times differentiable with respect to $\theta$ and $\theta$ is on the interior of the support of the prior.)
+
+ * For large $n$, a normal approximation to the posterior is $\Theta | X = x \simapprox \text{Normal}\left(\hat{\theta}^{MLE}, \frac{1}{J\left(\hat{\theta}^{MLE}\right)}\right)$
+
+\afterpage{\null\newpage}
+
+\newpage
+
+#### n = 1 (I had x = 1 blue M&M in my sample)
+
+**Can't form the normal approximation:** $n - x = 1 - 1 = 0$, so the approximation to the posterior variance is
+
+$$\frac{1}{\frac{n^2}{x} + \frac{n^2}{n - x}} = \frac{1}{1 + \frac{1}{0}} = \frac{1}{1 + \infty} = 0?$$
+
+```{r, fig.height=2.25}
+x <- 1
+n <- 1
+a_posterior <- 1 + x
+b_posterior <- 1 + n - x
+
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = a_posterior, shape2 = b_posterior)) +
+  geom_vline(xintercept = x/n, color = "orange", linetype = 2) +
+  theme_bw()
+```
+
+Posterior mean and 95% posterior credible interval based on the exact Beta posterior:
+
+```{r}
+a_posterior/(a_posterior + b_posterior)
+qbeta(c(0.025, 0.975), shape1 = a_posterior, shape2 = b_posterior)
+```
+
+**Can't get anything out of the normal approximation to the posterior**
+
+\newpage
+
+#### n = 10 (I had x = 3 blue M&Ms in my sample)
+
+```{r, fig.height = 2.5}
+x <- 3
+n <- 10
+a_posterior <- 1 + x
+b_posterior <- 1 + n - x
+
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = a_posterior, shape2 = b_posterior)) +
+  stat_function(fun = dnorm,
+    args = list(mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x)))),
+    color = "orange",
+    linetype = 2) +
+  geom_vline(xintercept = x/n, color = "orange", linetype = 2) +
+  theme_bw()
+```
+
+Posterior mean and 95% posterior credible interval based on the exact Beta posterior:
+
+```{r}
+a_posterior/(a_posterior + b_posterior)
+qbeta(c(0.025, 0.975), shape1 = a_posterior, shape2 = b_posterior)
+```
+
+Approximate posterior mean and 95% posterior credible interval based on the approximate normal posterior:
+
+```{r}
+x/n
+qnorm(c(0.025, 0.975), mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x))))
+```
+
+\newpage
+
+#### n = 20 (I had x = 7 blue M&Ms in my sample)
+
+```{r, fig.height = 2.5}
+x <- 7
+n <- 20
+a_posterior <- 1 + x
+b_posterior <- 1 + n - x
+
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = a_posterior, shape2 = b_posterior)) +
+  stat_function(fun = dnorm,
+    args = list(mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x)))),
+    color = "orange",
+    linetype = 2) +
+  geom_vline(xintercept = x/n, color = "orange", linetype = 2) +
+  theme_bw()
+```
+
+Posterior mean and 95% posterior credible interval based on the exact Beta posterior:
+
+```{r}
+a_posterior/(a_posterior + b_posterior)
+qbeta(c(0.025, 0.975), shape1 = a_posterior, shape2 = b_posterior)
+```
+
+Approximate posterior mean and 95% posterior credible interval based on the approximate normal posterior:
+
+```{r}
+x/n
+qnorm(c(0.025, 0.975), mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x))))
+```
+
+\newpage
+
+#### Sample of large size (As a class, we had x = 138 blue M&Ms in a sample of size n = 541)
+
+```{r, fig.height = 2.5}
+x <- 138
+n <-541
+a_posterior <- 1 + x
+b_posterior <- 1 + n - x
+
+ggplot(data = data.frame(theta = c(0, 1)), mapping = aes(x = theta)) +
+  stat_function(fun = dbeta,
+    args = list(shape1 = a_posterior, shape2 = b_posterior)) +
+  stat_function(fun = dnorm,
+    args = list(mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x)))),
+    color = "orange",
+    linetype = 2) +
+  geom_vline(xintercept = x/n, color = "orange", linetype = 2) +
+  theme_bw()
+```
+
+Posterior mean and 95% posterior credible interval based on the exact Beta posterior:
+
+```{r}
+a_posterior/(a_posterior + b_posterior)
+qbeta(c(0.025, 0.975), shape1 = a_posterior, shape2 = b_posterior)
+```
+
+Approximate posterior mean and 95% posterior credible interval based on the approximate normal posterior:
+
+```{r}
+x/n
+qnorm(c(0.025, 0.975), mean = x/n, sd = sqrt(1/(n^2 / x + n^2 / (n - x))))
+```

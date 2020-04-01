@@ -339,7 +339,16 @@ make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", '
 
 #### Wed, Apr 01
  * **In class**, we will work on:
+    * Example of finding a normal approximation to the posterior distribution and using that approximation to find a credible interval:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/FdQErLxNtvM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200401_Bayes_large_sample_CI/binomial_approx_posterior_ci.pdf)
+    * Worksheet and lab:
+        * Worksheet (written part introducing lab 11 -- do this before lab 11)
+            * Written part: [pdf](materials/20200401_Bayes_large_sample_CI/lab11_bayes_normal_approx_worksheet.pdf)
+            * Solutions to written part: [pdf](materials/20200401_Bayes_large_sample_CI/lab11_bayes_normal_approx_worksheet_solutions.pdf)
+        * Now go on to lab 11, distributed via GitHub.  Solutions will be posted on the labs page some time on Wednesday April 1.
  * **After class**, please:
+    *  Finish worksheet and lab from today.
 
 
 #### Fri, Apr 03
