@@ -26,3 +26,6 @@ title: "Labs"
 | 10  | Large n approximation to sampling distribution| 3/13/2020 |  1    | https://github.com/mhc-stat343-s2020/lab10-solutions  |
 |     | of the MLE.                                   |           |       |                                                       |
 +-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
+| 11  | Large n approximation to the posterior        | 4/3/2020  |  1    | https://github.com/mhc-stat343-s2020/lab11-solutions  |
+|     | distribution in a Bayesian analysis.          |           |       |                                                       |
++-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
