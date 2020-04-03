@@ -1,0 +1,61 @@
+---
+title: "Definitions and Example for Confidence Intervals"
+output: pdf_document
+header-includes:
+   - \usepackage{afterpage}
+---
+
+\afterpage{\null\newpage\null\newpage}
+
+\newpage
+
+# Example: Body Temperatures
+
+* It's generally believed that the average body temperature is 98.6 degrees Farenheit (37 degrees Celsius).
+* Let's investigate with measurements of the temperatures of 130 adults.
+
+```{r setup, message = FALSE, warning = FALSE, echo = FALSE}
+require(ggplot2)
+require(dplyr)
+bodytemp = read.table('http://www.amstat.org/publications/jse/datasets/normtemp.dat.txt')
+names(bodytemp) <- c('temp', 'sex', 'hr')
+```
+
+### Confidence Interval Calculation
+
+Sample mean and standard deviation:
+
+```{r}
+x_bar <- mean(bodytemp$temp)
+x_bar
+s <- sd(bodytemp$temp)
+s
+```
+
+Verifying our sample size is $n = 130$
+
+```{r}
+n <- nrow(bodytemp)
+n
+```
+
+Finding appropriate quantiles for a 95% confidence interval:
+
+```{r}
+t_lower <- qt(0.025, df = n - 1)
+t_lower
+t_upper <- qt(0.975, df = n - 1)
+t_upper
+```
+
+Calculation of the confidence interval:
+
+```{r}
+x_bar - t_upper * s / sqrt(n)
+x_bar - t_lower * s / sqrt(n)
+```
+
+
+
+
+

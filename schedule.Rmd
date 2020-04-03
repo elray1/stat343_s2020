@@ -353,7 +353,17 @@ make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", '
 
 #### Fri, Apr 03
  * **In class**, we will work on:
- * **After class**, please:
+    * Taking stock of where we are in the class:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/OT5eVFHMRJk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    * Motivating example for confidence intervals:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/SkDIzdRh_r4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200403_freq_CI/20200403_freq_ci_motivation_normal_body_temps.pdf)
+    * Defining confidence intervals, and an example of a confidence interval derivation:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/ZZVSkkh_jOQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200403_freq_CI/20200403_freq_ci_example_normal_body_temps.pdf)
+        * Errors:
+            * At about minute 36 I wrote down the wrong formula for the confidence interval.  The formula should be $[\\bar{x} - t_{n-1}(1 - \\frac{\\alpha}{2}) \\frac{s}{\\sqrt{n}}, \\bar{x} - t_{n-1}(\\frac{\\alpha}{2}) \\frac{s}{\\sqrt{n}}]$
+    * The videos were longer than I originally planned, so we\'ll do the example/lab next class.
 ')
 ```
 

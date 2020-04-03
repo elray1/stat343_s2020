@@ -1,0 +1,44 @@
+---
+title: "Motivating Example for Confidence Intervals"
+output: pdf_document
+---
+
+# Example: Body Temperatures
+
+* It's generally believed that the average body temperature is 98.6 degrees Farenheit (37 degrees Celsius).
+* Let's investigate with measurements of the temperatures of 130 adults.
+
+```{r setup, message = FALSE, warning = FALSE, echo = FALSE}
+require(ggplot2)
+require(dplyr)
+```
+
+
+#### Read in data set
+
+```{r}
+bodytemp = read.table('http://www.amstat.org/publications/jse/datasets/normtemp.dat.txt')
+names(bodytemp) <- c('temp', 'sex', 'hr')
+head(bodytemp)
+```
+
+#### Make a plot
+
+```{r, fig.height=2}
+ggplot(data = bodytemp, mapping = aes(x = temp)) +
+  geom_density()
+```
+
+#### Model
+
+\vspace{4cm}
+
+
+#### Sample Statistics
+
+```{r}
+mean(bodytemp$temp)
+sd(bodytemp$temp)
+var(bodytemp$temp)
+```
+
