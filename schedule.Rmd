@@ -368,9 +368,16 @@ make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", '
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", "
+make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", '
 #### Mon, Apr 06
  * **In class**, we will work on:
+    * More details about confidence intervals: pivotal quantities, one-sided intervals
+        * <iframe width=\"560\" height=\"315\" src="https://www.youtube.com/embed/rk7e4Zy30Io" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200406_freq_CI/More_CI.pdf)
+    * Additional confidence interval example (variance of a normal distribution):
+        * Written part: [pdf](materials/20200406_freq_CI/20200406_freq_ci_normal_var.pdf)
+        * Written part solutions: [pdf](materials/20200406_freq_CI/20200406_freq_ci_normal_var_sol.pdf)
+        * Lab 12
  * **After class**, please:
 
 
@@ -382,7 +389,7 @@ make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", "
 #### Fri, Apr 10
  * **In class**, we will work on:
  * **After class**, please:
-")
+')
 ```
 
 ```{r, echo = FALSE, results='asis'}

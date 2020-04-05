@@ -1,0 +1,18 @@
+---
+title: "Confidence Interval for Variance of a normal distribution"
+output: pdf_document
+header-includes:
+   - \usepackage{afterpage}
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+Suppose $X_1, \ldots, X_n \simiid \text{Normal}(\mu, \sigma^2)$ with both $\mu$ and $\sigma^2$ unknown.
+
+#### (a) We have previously stated that $\frac{(n-1) S^2}{\sigma^2} \sim \chi^2_{n-1}$, where $S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2$.  Explain in a sentence or two why this is a pivotal quantity for $\sigma^2$.
+
+\vspace{4cm}
+
+#### (b) Use the pivotal quantity from part (a) to find a 2-sided confidence interval for $\sigma^2$.  At this point we are not working with a sample of observed data so your interval endpoints should be random variables.
+
+Hint: Note that if $\frac{1}{5} < \frac{1}{4} < \frac{1}{3}$, you can take the reciprocal of all three terms if you also reverse the direction of the inequalities: $5 > 4 > 3$.

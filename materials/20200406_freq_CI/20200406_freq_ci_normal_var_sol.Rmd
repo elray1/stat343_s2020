@@ -1,0 +1,33 @@
+---
+title: "Confidence Interval for Variance of a normal distribution"
+output: pdf_document
+header-includes:
+   - \usepackage{afterpage}
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+Suppose $X_1, \ldots, X_n \simiid \text{Normal}(\mu, \sigma^2)$ with both $\mu$ and $\sigma^2$ unknown.
+
+#### (a) We have previously stated that $\frac{(n-1) S^2}{\sigma^2} \sim \chi^2_{n-1}$, where $S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2$.  Explain in a sentence or two why this is a pivotal quantity for $\sigma^2$.
+
+The quantity $\frac{(n-1) S^2}{\sigma^2} = \frac{\sum_{i=1}^n (X_i - \bar{X})^2}{\sigma^2}$ is a function of the observable data $X_1, \ldots, X_n$ and $\sigma^2$, and the only parameter of its distribution is the degrees of freedom $n - 1$.  We know the sample size, so the distribution of $\frac{(n-1) S^2}{\sigma^2}$ does not depend on any unknown parameters.
+
+\vspace{4cm}
+
+#### (b) Use the pivotal quantity from part (a) to find a 2-sided confidence interval for $\sigma^2$.  At this point we are not working with a sample of observed data so your interval endpoints should be random variables.
+
+Hint: Note that if $\frac{1}{5} < \frac{1}{4} < \frac{1}{3}$, you can take the reciprocal of all three terms if you also reverse the direction of the inequalities: $5 > 4 > 3$.
+
+\begin{align*}
+1 - \alpha &= P\left(\chi^2_{n-1}(\frac{\alpha}{2}) \leq \frac{(n-1) S^2}{\sigma^2} \leq \chi^2_{n-1}(1 - \frac{\alpha}{2})\right) \\
+&= P\left(\frac{1}{\chi^2_{n-1}(\frac{\alpha}{2})} \geq \frac{\sigma^2}{(n-1) S^2} \geq \frac{1}{\chi^2_{n-1}(1 - \frac{\alpha}{2})}\right) \\
+&= P\left(\frac{(n-1) S^2}{\chi^2_{n-1}(\frac{\alpha}{2})} \geq \sigma^2 \geq \frac{(n-1) S^2}{\chi^2_{n-1}(1 - \frac{\alpha}{2})}\right) \\
+&= P\left(\frac{(n-1) S^2}{\chi^2_{n-1}(1 - \frac{\alpha}{2})} \leq \sigma^2 \leq \frac{(n-1) S^2}{\chi^2_{n-1}(\frac{\alpha}{2})}\right)
+\end{align*}
+
+Therefore, a $(1 - \alpha) * 100\%$ confidence interval for $\sigma^2$ is $\left[\frac{(n-1) S^2}{\chi^2_{n-1}(1 - \frac{\alpha}{2})}, \frac{(n-1) S^2}{\chi^2_{n-1}(\frac{\alpha}{2})}\right]$.
+
+Unlike most confidence intervals you've seen in other classes, this interval is not of the form $$\text{(Estimate)} \pm \text{(Margin of Error)}.$$
+
+
