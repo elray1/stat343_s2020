@@ -29,3 +29,6 @@ title: "Labs"
 | 11  | Large n approximation to the posterior        | 4/3/2020  |  1    | https://github.com/mhc-stat343-s2020/lab11-solutions  |
 |     | distribution in a Bayesian analysis.          |           |       |                                                       |
 +-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
+| 12  | Confidence interval for variance of a normal  | 4/9/2020  |  1    | https://github.com/mhc-stat343-s2020/lab12-solutions  |
+|     | distribution.                                 |           |       |                                                       |
++-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
