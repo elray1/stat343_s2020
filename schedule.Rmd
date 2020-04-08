@@ -262,7 +262,7 @@ make_week_box("week7", FALSE, "Week 7: Mar 02 -- Mar 06", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week8", TRUE, "Week 8: Mar 09 -- Mar 13", "
+make_week_box("week8", FALSE, "Week 8: Mar 09 -- Mar 13", "
 #### Mon, Mar 09
  * **In class**, we will work on:
      * Large-sample normal approximation to sampling distribution of MLE (Continuing handouts from last class)
@@ -315,7 +315,7 @@ make_week_box("week10", FALSE, "Week 10: Mar 23 -- Mar 27", "
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week11", TRUE, "Week 11: Mar 30 -- Apr 03", '
+make_week_box("week11", FALSE, "Week 11: Mar 30 -- Apr 03", '
 #### Mon, Mar 30
  * **In class**, we will work on:
     * Reminder/overview of recent topics:
@@ -383,11 +383,21 @@ make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", '
 
 #### Wed, Apr 08
  * **In class**, we will work on:
- * **After class**, please:
-
+    * Motivation for getting confidence intervals based on a large-sample normal approximation to a sampling distribution:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/RQKLSFb7eYk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200408_wald_CI/Wald_motivation.pdf)
+    * Example of getting confidence intervals based on a large-sample normal approximation to a sampling distribution:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/99VSt5V_r-0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200408_wald_CI/Example_notes.pdf)
+        * Results from R: [pdf](materials/20200408_wald_CI/20200408_poisson_large_sample_ci.pdf)
+    * Example for you to do: Rayleigh distribution
+        * Written part: [pdf](materials/20200408_wald_CI/20200408_rayleigh_large_sample_ci.pdf)
+        * Written part solutions: [pdf](materials/20200408_wald_CI/20200408_rayleigh_large_sample_ci_sol.pdf)
+        * Lab 13
 
 #### Fri, Apr 10
  * **In class**, we will work on:
+    * Bootstrap CIs
  * **After class**, please:
 ')
 ```

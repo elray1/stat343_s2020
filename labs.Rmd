@@ -32,3 +32,5 @@ title: "Labs"
 | 12  | Confidence interval for variance of a normal  | 4/9/2020  |  1    | https://github.com/mhc-stat343-s2020/lab12-solutions  |
 |     | distribution.                                 |           |       |                                                       |
 +-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
+| 13  | Large sample approximate confidence intervals | 4/10/2020 |  1    | https://github.com/mhc-stat343-s2020/lab13-solutions  |
++-----+-----------------------------------------------+-----------+-------+-------------------------------------------------------+
