@@ -397,8 +397,15 @@ make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", '
 
 #### Fri, Apr 10
  * **In class**, we will work on:
-    * Bootstrap CIs
- * **After class**, please:
+    * There is a little more content here than would fit into one class day.  I\'ll do a little less on Monday.
+    * Introduction to bootstrap for estimating a sampling distribution
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/9qAJUQBbNjY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Annotated notes: [pdf](materials/20200410_bootstrap/20200410_bootstrap_annotated_video1.pdf)
+    * Example of bootstrap for estimating the distribution of the mean for a Poisson distribution
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/4VCGLYTW-hw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Annotated notes: [pdf](materials/20200410_bootstrap/20200410_bootstrap_example_annotated.pdf)
+        * Handout from video 1 with new notes I made for this video: [pdf](materials/20200410_bootstrap/20200410_bootstrap_annotated_video2.pdf)
+        * R Markdown document for example: [Rmd](materials/20200410_bootstrap/20200410_bootstrap_example.Rmd)
 ')
 ```
 

@@ -1,0 +1,196 @@
+---
+title: "Bootstrap Estimation of a Sampling Distribution"
+output: pdf_document
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+**Background**
+
+ * Confidence intervals are derived from the sampling distribution of a pivotal quantity $T$
+    * Often involves $\hat{\Theta}_{MLE}$ and $\theta$.
+ * Approaches so far:
+    * Get exact sampling distribution (not always possible, depends on correct model specification):
+        * If $X_1, \ldots, X_n \simiid \text{Normal}(\mu, \sigma^2)$ then $T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}$
+        * If $X_1, \ldots, X_n \simiid \text{Normal}(\mu, \sigma^2)$ then $T = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}$
+    * If $n$ is large, parameter is not on boundary of parameter space, everything is differentiable, ..., then approximately $T = \frac{\hat{\Theta}^{MLE} - \theta}{\sqrt{\frac{1}{I\left(\hat{\theta}^{MLE}\right)}}} \sim \text{Normal}(0, 1)$
+ * New approach: **simulation-based approximation** to the sampling distribution.
+    * In general, this may be used to approximate the sampling distribution of either:
+        * the original estimator $\hat{\Theta}$; or
+        * a pivotal quantity $T$ based on the estimator, like $T = \frac{\hat{\Theta} - \mu}{SE(\hat{\Theta})}$
+
+
+\newpage
+
+**Simulation-based approximation to sampling distribution of random variable $\hat{\Theta}$:**
+
+Observation: The sampling distribution of $\hat{\Theta}$ is the distribution of values $\hat{\theta}$ obtained from all possible samples of size $n$.
+
+1. For $b = 1, \ldots, B$:
+    a. Draw a sample of size $n$ from the population/data model
+    b. Calculate the value of the estimate $\hat{\theta}_b$ based on that sample (a number)
+2. The distribution of $\{\hat{\theta}_1, \ldots, \hat{\theta}_B\}$ from different simulated samples approximates the sampling distribution of the estimator $\hat{\Theta}$.
+
+Example: We have data that contains a record of the gestation time (how many weeks pregnant the mother was when she gave birth) for the population of every baby born in December 1998 in the United States.
+
+\includegraphics[height=15cm]{sample_means_pop_known.png}
+
+ * As $B \rightarrow \infty$, we get a better approximation to the distribution of $\hat{\Theta}$
+
+ * **Challenge**: If we don't know the population distribution, we can't simulate samples from the population
+
+\newpage
+
+**Simulation-based approximation to sampling distribution of random variable $T$:**
+
+Observation: The sampling distribution of $T$ is the distribution of values $t$ obtained from all possible samples of size $n$.
+
+1. For $b = 1, \ldots, B$:
+    a. Draw a sample of size $n$ from the population/data model
+    b. Calculate the value of $t_b$ based on that sample (a number)
+2. The distribution of $\{t_1, \ldots, t_B\}$ from different simulated samples approximates the sampling distribution of the pivotal quantity $T$.
+
+Example: We have data that contains a record of the gestation time (how many weeks pregnant the mother was when she gave birth) for the population of every baby born in December 1998 in the United States.
+
+\includegraphics[height=15cm]{babies_sample_ts.png}
+
+ * As $B \rightarrow \infty$, we get a better approximation to the distribution of $T$
+
+ * **Challenge**: If we don't know the population distribution, we can't simulate samples from the population
+
+\newpage
+
+#### Idea:
+
+ * Treat the distribution of the data in our sample as an estimate of the population distribution
+
+Suppose we have a sample of 30 babies.  How does its distribution compare to the population distribution?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(mosaic)
+library(gridExtra)
+
+babies <- read_csv("http://www.evanlray.com/data/misc/babies1998/babies_dec_1998.csv")
+babies <- babies %>%
+  filter(!is.na(gestation))
+
+pop_mean <- mean(babies$gestation)
+pop_sd <- sd(babies$gestation)
+
+n <- 30
+
+set.seed(987)
+
+babies_sample <- babies %>%
+  sample_n(size = n)
+```
+
+**View 1: In terms of histograms (think pdfs):**
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 4, fig.width = 5.9}
+p1 <- ggplot(data = babies, mapping = aes(x = gestation)) + 
+  geom_histogram(mapping = aes(y = ..density..)) +
+  xlim(c(10, 50)) +
+  ggtitle("Population: 330,717 babies")
+
+p2 <- ggplot(data = babies_sample, mapping = aes(x = gestation)) + 
+  geom_histogram(mapping = aes(y = ..density..)) +
+  xlim(c(10, 50)) +
+  ggtitle("Sample: 30 babies")
+
+grid.arrange(p1, p2, ncol = 1)
+```
+
+**View 2: In terms of cdfs**
+
+Recall that $F_X(x) = P(X \leq x)$
+
+Based on an observed sample $x_1, \ldots, x_n$ each drawn independently from the distribution with pdf $f_X(x_i)$ and cdf $F_X(x_i)$, we estimate $F_X(x)$ by the *empirical cdf*: $\hat{F}_X(x) = \frac{\text{\# in sample $\leq$ x}}{n}$
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 2, fig.width = 6.8}
+F_df <- bind_rows(
+  data.frame(gestation = 10, n = 0, F_hat = 0, type = "F"),
+  babies %>%
+    count(gestation) %>%
+    mutate(
+      F_hat = cumsum(n) / sum(n),
+      type = "F"
+    )
+  )
+
+F_df <- bind_rows(
+  F_df,
+  F_df %>%
+    mutate(
+      F_hat = lag(F_hat)
+    ) %>%
+    slice(-1),
+  data.frame(gestation = 50, n = 0, F_hat = 1, type = "F")
+) %>%
+  arrange(gestation, F_hat)
+
+  
+F_hat_df <- bind_rows(
+  data.frame(gestation = 10, n = 0, F_hat = 0, type = "F hat"),
+  babies_sample %>%
+    count(gestation) %>%
+    mutate(
+      F_hat = cumsum(n) / sum(n),
+      type = "F hat"
+    )
+  )
+
+F_hat_df <- bind_rows(
+  F_hat_df,
+  F_hat_df %>%
+    mutate(
+      F_hat = lag(F_hat)
+    ) %>%
+    slice(-1),
+  data.frame(gestation = 50, n = 0, F_hat = 1, type = "F hat")
+) %>%
+  arrange(gestation, F_hat)
+
+F_combined <- bind_rows(F_df, F_hat_df)
+
+ggplot(data = F_combined, mapping = aes(x = gestation, y = F_hat, color = type, linetype = type)) + 
+  geom_line() +
+  scale_y_continuous(breaks = seq(from = 0, to = 1, by = 0.2)) +
+  xlim(c(10, 50)) +
+  ylab(expression(paste(F(x)," or ",hat(F)(x))))
+```
+
+**If $\hat{F}_X(x)$ (or $\hat{f}_X(x)$) is a good estimate of $F_X(x)$ (or $f_X(x)$), then a sample drawn from the distribution specified by $\hat{F}_X(x)$ will look similar to a sample drawn from $F_X(x)$.**
+
+ * Instead of repeatedly drawing samples from $F_X(x)$ to approximate the sampling distribution of $\hat{\Theta}$ or $T$, repeatedly draw samples from $\hat{F}_X(x)$.
+ * In practice, this means (repeatedly) draw a sample of size $n$ **with replacement** from our observed data.
+
+\newpage
+
+1. For $b = 1, \ldots, B$:
+    a. Draw a bootstrap sample of size $n$ **with replacement** from the observed data
+    b. Calculate the estimate $\hat{\theta}_b$ based on that bootstrap sample (a number)
+2. The distribution of estimates $\{\hat{\theta}_1, \ldots, \hat{\theta}_B\}$ from different simulated samples approximates the sampling distribution of the estimator $\hat{\theta}$ (the random variable).
+
+\includegraphics[height=25cm]{bs_illustration.png}
+
+\newpage
+
+Compare the approximations from sampling directly from the population and from bootstrap resampling:
+
+Many means, based on samples from the population:
+
+\includegraphics{babies_sample_means_zoomed_in.pdf}
+
+Many means, based on bootstrap resamples with replacement from the sample:
+
+\includegraphics{babies_sample_bs_wide.pdf}
+
+ * Properties:
+    * Bootstrap distribution **reproduces shape, variance, and bias** of actual sampling distribution
+    * Bootstrap distribution **does not reproduce mean** of actual sampling distribution
+        * E.g., centered at sample mean instead of population mean
