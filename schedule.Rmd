@@ -410,21 +410,40 @@ make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", '
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week13", TRUE, "Week 13: Apr 13 -- Apr 17", "
+make_week_box("week13", TRUE, "Week 13: Apr 13 -- Apr 17", '
 #### Mon, Apr 13
- * **In class**, we will work on:
- * **After class**, please:
+ * **In class**, we will work on bootstrap confidence intervals
+    * Materials used throughout all videos today and next class
+        * Handout without my writing on it:  [pdf](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs.pdf)
+        * Handout with my notes on it: [pdf](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs_annotated.pdf)
+        * R markdown file used to generate handout: [Rmd](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs.Rmd)
+    * Introduction and set up:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/-PmfQRHnZKw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Errors and Notes:
+            * At about 6:40, I gave an incorrect formula for the estimated standard error of the sample mean.  The correct formula is $\\widehat{SE}(\\bar{X}) = S/\\sqrt{n} = \\left[ \\frac{\\sum_{i=1}^n (X_i - \\bar{X})^2}{n - 1} \\right]^{0.5} / \\sqrt{n}$
+            * As I made this video, I claimed we really needed a bootstrap for this case.  As I looked at the example more, I decided that although I\'m most comfortable with a bootstrap based interval in this example, probably other approaches would also work OK.
+    * Percentile bootstrap confidence intervals:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/TfhAqithJQU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    * Bootstrap t confidence intervals when a formula is available to calculate the estimated standard error.
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/xEQrAfHfqCk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 #### Wed, Apr 15
  * **In class**, we will work on:
+    * Continuing with handout from April 13
+    * Bootstrap t confidence intervals when no formula is available to calculate the estimated standard error.  Part 1: concepts
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/VqBxWaJOiNY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    * Bootstrap t confidence intervals when no formula is available to calculate the estimated standard error.  Part 2: code walk-through
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/XpzOBgX_HyU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    * Lab on bootstrap confidence intervals
  * **After class**, please:
 
 
 #### Fri, Apr 17
  * **In class**, we will work on:
+    * Introduce framework for hypothesis testing
  * **After class**, please:
-")
+')
 ```
 
 ```{r, echo = FALSE, results='asis'}
