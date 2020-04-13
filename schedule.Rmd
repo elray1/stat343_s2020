@@ -405,7 +405,7 @@ make_week_box("week12", TRUE, "Week 12: Apr 06 -- Apr 10", '
         * <iframe width="560" height="315" src="https://www.youtube.com/embed/4VCGLYTW-hw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         * Annotated notes: [pdf](materials/20200410_bootstrap/20200410_bootstrap_example_annotated.pdf)
         * Handout from video 1 with new notes I made for this video: [pdf](materials/20200410_bootstrap/20200410_bootstrap_annotated_video2.pdf)
-        * R Markdown document for example: [Rmd](materials/20200410_bootstrap/20200410_bootstrap_example.Rmd)
+        * R Markdown document for example: [Rmd](materials/20200410_bootstrap/20200410_bootstrap_example.Rmd) [GitHub](https://github.com/mhc-stat343-s2020/20200410_bootstrap_example)
 ')
 ```
 
@@ -416,7 +416,7 @@ make_week_box("week13", TRUE, "Week 13: Apr 13 -- Apr 17", '
     * Materials used throughout all videos today and next class
         * Handout without my writing on it:  [pdf](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs.pdf)
         * Handout with my notes on it: [pdf](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs_annotated.pdf)
-        * R markdown file used to generate handout: [Rmd](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs.Rmd)
+        * R markdown file used to generate handout: [Rmd](materials/20200413_bootstrap_CIs/20200413_bootstrap_CIs.Rmd) [GitHub](https://github.com/mhc-stat343-s2020/20200413_bootstrap_ci_example)
     * Introduction and set up:
         * <iframe width="560" height="315" src="https://www.youtube.com/embed/-PmfQRHnZKw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         * Errors and Notes:
