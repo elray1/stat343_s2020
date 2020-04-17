@@ -441,7 +441,12 @@ make_week_box("week13", TRUE, "Week 13: Apr 13 -- Apr 17", '
 
 #### Fri, Apr 17
  * **In class**, we will work on:
-    * Introduce framework for hypothesis testing
+    * Reminder about likelihood ratios:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/n0R5EcV0Z00" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes on worksheet from 2020-03-04.  We talked about this handout in more detail that day.  [pdf](materials/20200417_intro_hypothesis_test/20200417_large_sample_information.pdf)
+    * First examples (more to come on Monday):
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/ZT5Odl6-A_Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200417_intro_hypothesis_test/20200417_intro_test_annotated.pdf)
  * **After class**, please:
 ')
 ```
