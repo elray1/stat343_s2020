@@ -75,3 +75,15 @@ title: "Homework"
 |              | R part:                                       |           |       |                                                    |
 |              | Distributed via GitHub.                       |           |       |                                                    |
 +--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
+|    6         | Large sample results.                         | 5 pm,     |  1    |                                                    |
+|              |                                               | 4/28/2020 |       |                                                    |
+|              | Note: for this assignment, do the written     |           |       |                                                    |
+|              | part before the R part.                       |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | Written part:                                 |           |       |                                                    |
+|              | [pdf](homework/ps6/ps6_written.pdf)           |           |       |                                                    |
+|              | [Rmd](homework/ps6/ps6_written.Rmd)           |           |       |                                                    |
+|              |                                               |           |       |                                                    |
+|              | R part:                                       |           |       |                                                    |
+|              | Distributed via GitHub.                       |           |       |                                                    |
++--------------+-----------------------------------------------+-----------+-------+----------------------------------------------------+
