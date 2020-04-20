@@ -463,11 +463,11 @@ make_week_box("week14", TRUE, "Week 14: Apr 20 -- Apr 24", '
         * Example: [pdf](materials/20200420_more_hypothesis_test/20200420_test_example_normal.pdf)
         * Solutions: [pdf](materials/20200420_more_hypothesis_test/20200420_test_example_normal_sol.pdf)
         * Solutions video: <iframe width="560" height="315" src="https://www.youtube.com/embed/DaiF_ukQXjQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    * Lab 15, which follows up on the second example above.
 
 
 #### Wed, Apr 22
  * **In class**, we will work on:
- * **After class**, please:
 
 
 #### Fri, Apr 24
