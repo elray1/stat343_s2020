@@ -1,0 +1,50 @@
+---
+title: "Hypothesis Testing - Normal Example"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+We have 2 batches of paint, one of which is quick-dry; quick-dry paint will dry in an average of 10 minutes, and regular paint in an average of 25 minutes.  The paint is unlabeled, and
+we forgot which was which!  We paint 5 boards from batch 1 and record the drying time.  We believe that the drying times are normally distributed with a standard deviation of 5
+minutes for both paint types.
+
+We have a vague feeling that batch 1 is quick-dry; we will calculate a p-value to see how strong the evidence is that the batch we used is *not* 25 minutes:
+
+$H_0: \theta = 25$
+
+$H_A: \theta = 10$
+
+#### (a) Find the form of the likelihood ratio statistic for this test.
+
+You will need to use the fact that if $X_i \sim \text{Normal}(\theta, \sigma^2)$ then its pdf is $f_{X_i}(x_i) = \frac{1}{\sqrt{2 \pi \sigma^2}}  \exp\left[ \frac{-1}{2 \sigma^2} (x_i - \theta)^2 \right]$.  In this case, we are assuming $\sigma = 5$; the value of $\theta$ will be different in the numerator and denominator of the likelihood ratio statistic.
+
+\vspace{4cm}
+
+#### (b) Show that the likelihood ratio statistic can be simplified to a form that involves the sample mean $\bar{X}$.
+
+\newpage
+
+#### (c) Show how the p-value for the likelihood ratio test could be calculated based on an observed sample mean of $\bar{x}$.  Your answer should be a probability involving the random variable $\bar{X}$ and the observed value $\bar{x}$ based on the observed sample data.
+
+\vspace{4cm}
+
+#### (d) Show that your p-value calculation from part (c) is equivalent to $P(\bar{X} \leq \bar{x})$
+
+
+\newpage
+
+#### (e) Is a small or large value of $\bar{x}$ evidence against $H_0$?  How is this determined by the set up of the null and alternative hypotheses?
