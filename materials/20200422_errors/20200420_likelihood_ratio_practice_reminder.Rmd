@@ -1,0 +1,47 @@
+---
+title: "Hypothesis Testing - Likelihood Ratio Warm-Up"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+header-includes:
+  - \usepackage{booktabs}
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+\begin{center}
+$H_0$: the first distribution is correct
+
+$H_A$: the second distribution is correct
+\end{center}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{c c c c c}
+\toprule
+    & $f_X(x)$ & $f_X(x)$ & Likelihood & \\
+$x$ &   $H_0$  &  $H_A$   & Ratio      & p-value\\
+\toprule
+1 & 0.2 & 0.1 & 2 & 0.7 \\
+\midrule
+2 & 0.3 & 0.4 & 0.75 & 0.5 \\
+\midrule
+3 & 0.3 & 0.1 & 3 & 1 \\
+\midrule
+4 & 0.2 & 0.4 & 0.5 & 0.2 \\
+\bottomrule
+\end{tabular}
+\end{table}

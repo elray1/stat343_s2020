@@ -468,6 +468,15 @@ make_week_box("week14", TRUE, "Week 14: Apr 20 -- Apr 24", '
 
 #### Wed, Apr 22
  * **In class**, we will work on:
+    * Introduction to decisions with hypothesis tests; errors; limitations of the framework
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/uqEBHUThjN8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200422_errors/Htest_decisions.pdf)
+    * Type I Errors:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/HH00y4F6_qI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200422_errors/Errors.pdf)
+    * Type II Errors and Power:
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/eFSbspF-wNs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200422_errors/Type_II_errors_and_power.pdf)
 
 
 #### Fri, Apr 24
