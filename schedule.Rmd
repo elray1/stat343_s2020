@@ -481,6 +481,22 @@ make_week_box("week14", TRUE, "Week 14: Apr 20 -- Apr 24", '
 
 #### Fri, Apr 24
  * **In class**, we will work on:
+    * Warm Up about Power Functions **I suggest giving the problem a try before watching the solutions video or looking at the solutions pdf.**
+        * Warm up: [pdf](materials/20200424_power/20200424_power_warmup.pdf)
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/VSbo8VWYi7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Annotated solutions: [pdf](materials/20200424_power/20200424_power_warmup_sol_annotated.pdf)
+    * Motivation for Neyman Pearson Lemma **I suggest giving the problem a try before watching the solutions video or looking at the solutions pdf.**
+        * Warm up: [pdf](materials/20200424_power/20200424_np_motivation.pdf)
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/ddh3kvYkSjQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Annotated solutions: [pdf](materials/20200424_power/20200424_np_motivation_sol_annotated.pdf)
+    * Set up for Neyman Pearson Lemma: reminder and more detail about likelihood ratios
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/ECorAM_z48M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Annotated pdf: [pdf](materials/20200424_power/20200424_likelihood_ratios_annotated.pdf)
+    * Statement and proof of Neyman Pearson Lemma
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/l3EezWQRc_I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200424_power/NP.pdf)
+        
+
  * **After class**, please:
 ')
 ```

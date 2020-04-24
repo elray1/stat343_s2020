@@ -1,0 +1,116 @@
+---
+title: "Likelihood Ratios"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+documentclass: extarticle
+geometry: margin=0.6in
+---
+
+\def\simiid{\stackrel{{\mbox{\text{\tiny i.i.d.}}}}{\sim}}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+require(ggplot2)
+require(scales)
+require(dplyr)
+require(tidyr)
+require(readr)
+require(mosaic)
+```
+
+ * Data Model: $X_1, \ldots, X_5 \simiid \text{Normal}(\theta, 5^2)$
+
+ * Let's consider a test of the hypotheses $H_0: \theta = 25$ vs. $H_A: \theta = 20$
+
+ * If $H_0$ is correct, then $\bar{X} \sim \text{Normal}(25, 5^2/5)$.  If $H_A$ is correct, then $\bar{X} \sim \text{Normal}(20, 5^2/5)$
+
+ * Two ways to think of the specification of the rejection region for the likelihood ratio test:
+
+#### 1. Reject $H_0$ if $\bar{x} \leq 21.322$
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 2, fig.width = 7, fig.align = 'center'}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 25, sd = sqrt(5)), color = "cornflowerblue") +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = sqrt(5)), color = "orange") +
+  geom_polygon(
+    mapping = aes(x = x, y = y),
+    fill = "cornflowerblue",
+    data = region_to_shade1) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("\n density")
+```
+
+#### 2. Reject $H_0$ if $W \leq w^*$ where $W$ is the likelihood ratio statistic
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 2, fig.width = 7, fig.align = 'center'}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+lr <- function(x) {
+  dnorm(x, mean = 25, sd = sqrt(5)) / dnorm(x, mean = 20, sd = sqrt(5))
+}
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = lr) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("likelihood ratio, w")
+```
+
+The scale of the likelihood ratio is challenging; let's look at the log:
+
+```{r, echo = FALSE, message=FALSE, cache = TRUE, fig.height = 2, fig.width = 7, fig.align = 'center'}
+x_grid_1 <- seq(from = 0, to = qnorm(0.05, mean = 25, sd = sqrt(5)), length = 101)
+
+region_to_shade1 <- data.frame(
+  x = c(0, x_grid_1, qnorm(0.05, mean = 25, sd = sqrt(5))),
+  y = c(0, dnorm(x_grid_1, mean = 25, sd = sqrt(5), log = FALSE), 0)
+)
+
+hypothesized_vals <- data.frame(
+  Hypothesis = c("H0", "HA"),
+  theta = c(25, 10)
+)
+
+lr <- function(x) {
+  dnorm(x, mean = 25, sd = sqrt(5), log = TRUE) - dnorm(x, mean = 20, sd = sqrt(5), log = TRUE)
+}
+
+ggplot(data = data.frame(x = c(0, 35)), mapping = aes(x = x)) +
+  stat_function(fun = lr) +
+  geom_vline(xintercept = qnorm(0.05, mean = 25, sd = sqrt(5))) +
+  coord_cartesian(xlim = c(10, 35), expand = TRUE) +
+  theme_bw() +
+  xlab(expression(bar(x))) +
+  ylab("\n log(likelihood ratio)")
+```
+
+
