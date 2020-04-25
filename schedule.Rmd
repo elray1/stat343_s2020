@@ -495,23 +495,21 @@ make_week_box("week14", TRUE, "Week 14: Apr 20 -- Apr 24", '
     * Statement and proof of Neyman Pearson Lemma
         * <iframe width="560" height="315" src="https://www.youtube.com/embed/l3EezWQRc_I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         * Notes: [pdf](materials/20200424_power/NP.pdf)
-        
-
- * **After class**, please:
 ')
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("week15", TRUE, "Week 15: Apr 27 -- May 01", "
+make_week_box("week15", TRUE, "Week 15: Apr 27 -- May 01", '
 #### Mon, Apr 27
  * **In class**, we will work on:
- * **After class**, please:
+    * Composite likelihood ratio tests; derivation of t tests
+        * <iframe width="560" height="315" src="https://www.youtube.com/embed/xmHv1dBfb80" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        * Notes: [pdf](materials/20200427/TTest.pdf)
 
-
-")
+')
 ```
 
 ```{r, echo = FALSE, results='asis'}
-make_week_box("finals", TRUE, "Final Exams: May 04 -- May 08", "We will not have a final exam in this class.")
+make_week_box("finals", TRUE, "Final Exams: May 04 -- May 08", "We **will** have a final exam in this class.")
 ```
 
