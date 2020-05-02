@@ -13,7 +13,12 @@ We will have roughly 6 quizzes and 2-3 midterms.  Topics covered for quizzes and
 +---------+----------------------------------------------------------+---------------+----------------------------------------------------------+
 | Quiz 3  | Topics: [pdf](quizzes/q3/quiz3_topics.pdf)               | 2020-03-02    |                                                          |
 +---------+----------------------------------------------------------+---------------+----------------------------------------------------------+
-| Final   | Open notes, due 12pm Tuesday April 5.                    | 2020-04-05    |                                                          |
-|         | Review: [pdf](exams/final/final_review.pdf)              |               |                                                          |
+| Final   | Open notes, due 12pm Tuesday April 5.                    |               |                                                          |
+| Review  | Review: [pdf](exams/final/final_review.pdf)              |               |                                                          |
 |         | Review Solutions: [pdf](exams/final/final_review_sol.pdf)|               |                                                          |
 +---------+----------------------------------------------------------+---------------+----------------------------------------------------------+
+| Final   | Open notes, due 12pm Tuesday April 5.                    | 2020-04-05    |                                                          |
+|         | Exam: [pdf](exams/final/final.pdf)                       |               |                                                          |
++---------+----------------------------------------------------------+---------------+----------------------------------------------------------+
+
+
